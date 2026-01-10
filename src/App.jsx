@@ -7,19 +7,19 @@ function App() {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false)
 
   return (
-    <div className="h-full bg-gray-900 text-white flex flex-col overflow-hidden">
+    <div className="h-full bg-gray-900 text-white relative overflow-hidden">
       {!isWorkoutActive ? (
         <>
           {/* Fixed Header */}
-          <div className="flex-shrink-0 px-4 pt-3 pb-2">
+          <div className="px-4 pt-3 pb-2">
             <div className="max-w-2xl mx-auto">
               <h1 className="text-3xl font-bold text-center mb-2">Kettlebell Tracker</h1>
               <h2 className="text-xl text-center" style={{ fontWeight: 200 }}>{workoutRoutine.name} by {workoutRoutine.author}</h2>
             </div>
           </div>
 
-          {/* Scrollable Exercise List */}
-          <div className="overflow-y-auto px-4 pt-3 pb-2" style={{ flex: '1 1 0', marginBottom: '48px' }}>
+          {/* Scrollable Exercise List - with padding-bottom for button */}
+          <div className="overflow-y-auto px-4 pt-3" style={{ height: 'calc(100% - 120px)', paddingBottom: '100px' }}>
             <div className="max-w-2xl mx-auto space-y-4">
               {workoutRoutine.exercises.map((exercise) => (
                 <div key={exercise.order} className="bg-gray-800 rounded-lg p-4">
@@ -44,8 +44,8 @@ function App() {
             </div>
           </div>
 
-          {/* Fixed Button Section */}
-          <div className="flex-shrink-0 px-4 pt-4 pb-4 bg-gray-900" style={{ marginTop: '-40px' }}>
+          {/* Fixed Button Section - Absolutely positioned at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 px-4 pt-4 pb-4 bg-gray-900">
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
