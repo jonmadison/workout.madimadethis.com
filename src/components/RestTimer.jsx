@@ -26,7 +26,7 @@ function RestTimer({ duration, onComplete, onSkip }) {
   const percentage = ((duration - timeLeft) / duration) * 100
 
   return (
-    <div className="bg-gray-800 rounded-lg p-8">
+    <div id="rest-timer" className="bg-gray-800 rounded-lg p-8">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold mb-4 text-yellow-400">Rest Time</h2>
 

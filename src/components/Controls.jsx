@@ -1,6 +1,6 @@
 function Controls({ onStartWorkout }) {
   return (
-    <div style={{ position: 'fixed', bottom: '16px', left: '16px', right: '16px', zIndex: 10 }}>
+    <div id="controls" style={{ position: 'fixed', bottom: '16px', left: '16px', right: '16px', zIndex: 10 }}>
       <div className="max-w-2xl mx-auto">
         <button
           onClick={onStartWorkout}

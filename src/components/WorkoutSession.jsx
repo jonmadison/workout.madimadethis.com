@@ -42,7 +42,7 @@ function WorkoutSession({ routine, onComplete }) {
   const progress = ((currentExerciseIndex * 100) / routine.length).toFixed(0)
 
   return (
-    <div className="h-full flex flex-col">
+    <div id="workout-session" className="h-full flex flex-col">
       {/* Progress Bar */}
       <div className="flex-shrink-0 px-4 pt-3 pb-2">
         <div className="max-w-2xl mx-auto">
