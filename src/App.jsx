@@ -14,7 +14,7 @@ function App() {
           <div className="flex-shrink-0 px-4 py-4">
             <div className="max-w-2xl mx-auto">
               <h1 className="text-4xl font-bold text-center mb-4">Kettlebell Tracker</h1>
-              <h2 className="text-2xl font-normal text-center">{workoutRoutine.name} by {workoutRoutine.author}</h2>
+              <h2 className="text-2xl text-center" style={{ fontWeight: 200 }}>{workoutRoutine.name} by {workoutRoutine.author}</h2>
             </div>
           </div>
 
