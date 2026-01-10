@@ -11,15 +11,15 @@ function App() {
       {!isWorkoutActive ? (
         <>
           {/* Fixed Header */}
-          <div className="flex-shrink-0 px-4 pt-2 pb-3">
+          <div className="flex-shrink-0 px-4 pt-3 pb-2">
             <div className="max-w-2xl mx-auto">
-              <h1 className="text-4xl font-bold text-center mb-3">Kettlebell Tracker</h1>
-              <h2 className="text-2xl text-center" style={{ fontWeight: 200 }}>{workoutRoutine.name} by {workoutRoutine.author}</h2>
+              <h1 className="text-3xl font-bold text-center mb-2">Kettlebell Tracker</h1>
+              <h2 className="text-xl text-center" style={{ fontWeight: 200 }}>{workoutRoutine.name} by {workoutRoutine.author}</h2>
             </div>
           </div>
 
           {/* Scrollable Exercise List */}
-          <div className="flex-1 overflow-y-auto px-4 pt-4 pb-2">
+          <div className="flex-1 overflow-y-auto px-4 pt-3 pb-2">
             <div className="max-w-2xl mx-auto space-y-4">
               {workoutRoutine.exercises.map((exercise) => (
                 <div key={exercise.order} className="bg-gray-800 rounded-lg p-4">
@@ -49,7 +49,7 @@ function App() {
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-8 rounded-full transition-colors text-lg min-h-[56px]"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px]"
               >
                 Start Workout
               </button>
