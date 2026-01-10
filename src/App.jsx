@@ -45,7 +45,7 @@ function App() {
           </div>
 
           {/* Fixed Button Section */}
-          <div className="flex-shrink-0 px-4 pt-4 pb-4 bg-gray-900">
+          <div className="flex-shrink-0 px-4 pt-4 pb-4 bg-gray-900" style={{ marginTop: '-40px' }}>
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
