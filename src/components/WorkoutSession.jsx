@@ -100,14 +100,14 @@ function WorkoutSession({ routine, onComplete }) {
           <div className="space-y-4">
             <button
               onClick={handleSetComplete}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg transition-colors text-xl"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-5 px-8 rounded-full transition-colors text-xl min-h-[56px]"
             >
               Complete Set
             </button>
 
             <button
               onClick={onComplete}
-              className="w-full bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+              className="w-full bg-gray-700 hover:bg-gray-600 text-white font-medium py-4 px-6 rounded-full transition-colors min-h-[48px]"
             >
               End Workout
             </button>
