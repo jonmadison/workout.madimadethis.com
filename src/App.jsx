@@ -45,7 +45,7 @@ function App() {
           </div>
 
           {/* Fixed Button Section - using fixed positioning */}
-          <div className="fixed bottom-4 left-4 right-4 z-10">
+          <div style={{ position: 'fixed', bottom: '16px', left: '16px', right: '16px', zIndex: 10 }}>
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
