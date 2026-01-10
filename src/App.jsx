@@ -19,7 +19,7 @@ function App() {
           </div>
 
           {/* Scrollable Exercise List */}
-          <div className="overflow-y-auto px-4 pt-3 pb-2" style={{ flex: '1 1 0', marginBottom: '36px' }}>
+          <div className="overflow-y-auto px-4 pt-3 pb-2" style={{ flex: '1 1 0', marginBottom: '48px' }}>
             <div className="max-w-2xl mx-auto space-y-4">
               {workoutRoutine.exercises.map((exercise) => (
                 <div key={exercise.order} className="bg-gray-800 rounded-lg p-4">
