@@ -7,7 +7,7 @@ function App() {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false)
 
   return (
-    <div className="h-screen bg-gray-900 text-white flex flex-col">
+    <div className="h-[100dvh] bg-gray-900 text-white flex flex-col overflow-hidden">
       {!isWorkoutActive ? (
         <>
           {/* Fixed Header */}
