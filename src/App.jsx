@@ -7,7 +7,7 @@ function App() {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false)
 
   return (
-    <div className="h-[100dvh] bg-gray-900 text-white flex flex-col overflow-hidden">
+    <div className="min-h-screen max-h-screen bg-gray-900 text-white flex flex-col overflow-hidden">
       {!isWorkoutActive ? (
         <>
           {/* Fixed Header */}
@@ -19,7 +19,7 @@ function App() {
           </div>
 
           {/* Scrollable Exercise List */}
-          <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="flex-1 overflow-y-auto px-4 pt-6 pb-4">
             <div className="max-w-2xl mx-auto space-y-4">
               {workoutRoutine.exercises.map((exercise) => (
                 <div key={exercise.order} className="bg-gray-800 rounded-lg p-4">
@@ -45,7 +45,7 @@ function App() {
           </div>
 
           {/* Fixed Button Section */}
-          <div className="flex-shrink-0 px-4 pb-4 bg-gray-900">
+          <div className="flex-shrink-0 px-4 pt-4 pb-6 bg-gray-900">
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
