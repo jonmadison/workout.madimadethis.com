@@ -45,7 +45,7 @@ function App() {
           </div>
 
           {/* Fixed Button Section */}
-          <div className="flex-shrink-0 px-4 py-6 border-t border-gray-800 bg-gray-900">
+          <div className="flex-shrink-0 px-4 pb-4 bg-gray-900">
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setIsWorkoutActive(true)}
