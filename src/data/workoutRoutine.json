@@ -1,0 +1,41 @@
+{
+  "name": "Lifetime Kettlebell",
+  "exercises": [
+    {
+      "order": 1,
+      "exercise": "Swings",
+      "setsReps": "5x15",
+      "rest": 45,
+      "weight": "35 lb",
+      "image": "/images_exercises/kb_tracker_swing.png",
+      "bellConfig": "single"
+    },
+    {
+      "order": 2,
+      "exercise": "Goblet Squats",
+      "setsReps": "3x8",
+      "rest": 60,
+      "weight": "25 lb",
+      "image": "/images_exercises/kb_tracker_goblet_squat.png",
+      "bellConfig": "single"
+    },
+    {
+      "order": 3,
+      "exercise": "Single-Arm Rows",
+      "setsReps": "3x8 each",
+      "rest": 30,
+      "weight": "25 lb",
+      "image": "/images_exercises/kb_tracker_single_arm_row.png",
+      "bellConfig": "alternating"
+    },
+    {
+      "order": 4,
+      "exercise": "Floor Press",
+      "setsReps": "3x8 each",
+      "rest": 30,
+      "weight": "20 lb",
+      "image": "/images_exercises/kb_tracker_floor_press.png",
+      "bellConfig": "alternating"
+    }
+  ]
+}
