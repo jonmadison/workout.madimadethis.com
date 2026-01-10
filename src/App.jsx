@@ -21,12 +21,10 @@ function App() {
           <Controls onStartWorkout={() => setIsWorkoutActive(true)} />
         </div>
       ) : (
-        <div className="container mx-auto px-4 py-8">
-          <WorkoutSession
-            routine={workoutRoutine.exercises}
-            onComplete={() => setIsWorkoutActive(false)}
-          />
-        </div>
+        <WorkoutSession
+          routine={workoutRoutine.exercises}
+          onComplete={() => setIsWorkoutActive(false)}
+        />
       )}
     </div>
   )
