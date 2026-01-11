@@ -50,13 +50,12 @@ jobs:
       - name: Deploy Amplify backend
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-        working-directory: ./amplify
         run: |
-          # Run from amplify directory so modules can be resolved
+          # Set NODE_PATH so ampx can find modules in amplify/node_modules
+          export NODE_PATH="$(pwd)/amplify/node_modules:$NODE_PATH"
           npx --package=@aws-amplify/backend-cli ampx pipeline-deploy \
             --branch main \
-            --app-id ${{ secrets.AMPLIFY_APP_ID }} \
-            --outputs-out-dir ..
+            --app-id ${{ secrets.AMPLIFY_APP_ID }}
 
       - name: Commit updated amplify_outputs.json
         run: |
