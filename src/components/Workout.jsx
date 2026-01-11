@@ -1,4 +1,6 @@
-function Workout({ exercises, workoutName, workoutAuthor }) {
+import { MdOutlineSwapHorizontalCircle, MdEdit } from 'react-icons/md';
+
+function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditWorkout }) {
   const today = new Date();
   const formattedDate = today.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -12,8 +14,24 @@ function Workout({ exercises, workoutName, workoutAuthor }) {
       <div className="max-w-2xl mx-auto px-10">
         <div className="mb-6">
           <p className="text-sm text-gray-600 mb-2">Today's workout - {formattedDate}</p>
-          <h2 className="text-xl font-semibold text-gray-900">{workoutName}</h2>
-          <p className="text-sm text-gray-600">by {workoutAuthor}</p>
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-xl font-semibold text-gray-900">{workoutName}</h2>
+            <button
+              onClick={onSwapWorkout}
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+              title="Change workout"
+            >
+              <MdOutlineSwapHorizontalCircle size={24} />
+            </button>
+          </div>
+          <p className="text-sm text-gray-600 mb-3">by {workoutAuthor}</p>
+          <button
+            onClick={onEditWorkout}
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+          >
+            <MdEdit size={16} />
+            Edit Workout
+          </button>
         </div>
         <div className="space-y-4">
           {exercises.map((exercise) => (

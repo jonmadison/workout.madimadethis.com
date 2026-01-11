@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
 import { getAuthenticatedUser, autoSignInDefaultUser } from '../services/authService';
 import { syncPendingWorkouts } from '../services/workoutService';
+import { seedDefaultWorkout } from '../services/workoutLibraryService';
 import LoginScreen from './LoginScreen';
 import amplifyConfig from '../../amplify_outputs.json';
 
@@ -23,6 +24,10 @@ function AuthWrapper({ children }) {
 
       if (currentUser) {
         setUser(currentUser);
+        // Seed default workout if this is a new user
+        seedDefaultWorkout(currentUser.username).catch(err =>
+          console.error('Failed to seed default workout:', err)
+        );
         // Sync any pending offline workouts
         syncPendingWorkouts().catch(err =>
           console.error('Background sync failed:', err)
@@ -36,6 +41,10 @@ function AuthWrapper({ children }) {
         const result = await autoSignInDefaultUser();
         if (result.success && result.user) {
           setUser(result.user);
+          // Seed default workout if this is a new user
+          seedDefaultWorkout(result.user.username).catch(err =>
+            console.error('Failed to seed default workout:', err)
+          );
           // Sync any pending offline workouts
           syncPendingWorkouts().catch(err =>
             console.error('Background sync failed:', err)

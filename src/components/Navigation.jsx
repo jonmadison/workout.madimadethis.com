@@ -40,6 +40,7 @@ function Navigation({ currentView, onNavigate, onLogout, user }) {
   const menuItems = [
     { id: 'home', label: 'Home', icon: '🏠' },
     { id: 'calendar', label: 'Calendar', icon: '📅' },
+    { id: 'library', label: 'My Workouts', icon: '📝' },
   ];
 
   // Get user initials for the avatar

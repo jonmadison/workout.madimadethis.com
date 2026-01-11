@@ -22,7 +22,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/198e10b40ac237bf5326aaff63b09fef1acdd916ebdfab92d3ade02f7b78eecc.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/32b7b5c63424a95809ae110f7344d567897f24f89f2beade0e50423def38716e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -951,6 +951,584 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataWorkoutHistoryNestedStackWorkoutHistoryNestedStackResource11A9C142"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomWorkoutTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomTableCustomWorkoutTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/GetAttCustomWorkoutTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttCustomWorkoutTableStreamArn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/GetAttCustomWorkoutTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttCustomWorkoutTableName"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkoutIAMRole"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomWorkoutIAMRole2E096FA0"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkoutIAMRole"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkoutTable"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomWorkoutDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkoutTable"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutpreAuth0Function/QuerygetCustomWorkoutpreAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetCustomWorkoutpreAuth0FunctionQuerygetCustomWorkoutpreAuth0FunctionAppSyncFunction71F0268F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetCustomWorkoutpreAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutauth0Function/QuerygetCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetCustomWorkoutauth0FunctionQuerygetCustomWorkoutauth0FunctionAppSyncFunction5FCAFC33"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutpostAuth0Function/QuerygetCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetCustomWorkoutpostAuth0FunctionQuerygetCustomWorkoutpostAuth0FunctionAppSyncFunction3CC90626"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QueryGetCustomWorkoutDataResolverFn/QueryGetCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetCustomWorkoutDataResolverFnQueryGetCustomWorkoutDataResolverFnAppSyncFunction9DD70648"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/queryGetCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutspreAuth0Function/QuerylistCustomWorkoutspreAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistCustomWorkoutspreAuth0FunctionQuerylistCustomWorkoutspreAuth0FunctionAppSyncFunction08302BA1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistCustomWorkoutspreAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutsauth0Function/QuerylistCustomWorkoutsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistCustomWorkoutsauth0FunctionQuerylistCustomWorkoutsauth0FunctionAppSyncFunctionDF2A29B1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistCustomWorkoutsauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutspostAuth0Function/QuerylistCustomWorkoutspostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistCustomWorkoutspostAuth0FunctionQuerylistCustomWorkoutspostAuth0FunctionAppSyncFunction94F600AD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistCustomWorkoutspostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QueryListCustomWorkoutsDataResolverFn/QueryListCustomWorkoutsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListCustomWorkoutsDataResolverFnQueryListCustomWorkoutsDataResolverFnAppSyncFunction3807A87A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListCustomWorkoutsDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/queryListCustomWorkoutsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listCustomWorkouts"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutinit0Function/MutationcreateCustomWorkoutinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateCustomWorkoutinit0FunctionMutationcreateCustomWorkoutinit0FunctionAppSyncFunction81162340"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateCustomWorkoutinit0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutpreAuth0Function/MutationcreateCustomWorkoutpreAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateCustomWorkoutpreAuth0FunctionMutationcreateCustomWorkoutpreAuth0FunctionAppSyncFunction3E53EBB8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateCustomWorkoutpreAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutauth0Function/MutationcreateCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateCustomWorkoutauth0FunctionMutationcreateCustomWorkoutauth0FunctionAppSyncFunction9F97D4EB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutpostAuth0Function/MutationcreateCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateCustomWorkoutpostAuth0FunctionMutationcreateCustomWorkoutpostAuth0FunctionAppSyncFunction4FB1BC22"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationCreateCustomWorkoutDataResolverFn/MutationCreateCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateCustomWorkoutDataResolverFnMutationCreateCustomWorkoutDataResolverFnAppSyncFunctionFFC7F9FD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationCreateCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutinit0Function/MutationupdateCustomWorkoutinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateCustomWorkoutinit0FunctionMutationupdateCustomWorkoutinit0FunctionAppSyncFunction0B534DC2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateCustomWorkoutinit0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutpreAuth0Function/MutationupdateCustomWorkoutpreAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateCustomWorkoutpreAuth0FunctionMutationupdateCustomWorkoutpreAuth0FunctionAppSyncFunctionF50326F9"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateCustomWorkoutpreAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutauth0Function/MutationupdateCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateCustomWorkoutauth0FunctionMutationupdateCustomWorkoutauth0FunctionAppSyncFunction5A910787"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutpostAuth0Function/MutationupdateCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateCustomWorkoutpostAuth0FunctionMutationupdateCustomWorkoutpostAuth0FunctionAppSyncFunction3836C52C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationUpdateCustomWorkoutDataResolverFn/MutationUpdateCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateCustomWorkoutDataResolverFnMutationUpdateCustomWorkoutDataResolverFnAppSyncFunction5278BB28"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationUpdateCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutpreAuth0Function/MutationdeleteCustomWorkoutpreAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteCustomWorkoutpreAuth0FunctionMutationdeleteCustomWorkoutpreAuth0FunctionAppSyncFunction90EC1619"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteCustomWorkoutpreAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutauth0Function/MutationdeleteCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteCustomWorkoutauth0FunctionMutationdeleteCustomWorkoutauth0FunctionAppSyncFunction574DE189"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutpostAuth0Function/MutationdeleteCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteCustomWorkoutpostAuth0FunctionMutationdeleteCustomWorkoutpostAuth0FunctionAppSyncFunction403D7AAB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationDeleteCustomWorkoutDataResolverFn/MutationDeleteCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteCustomWorkoutDataResolverFnMutationDeleteCustomWorkoutDataResolverFnAppSyncFunctionE6082DA7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationDeleteCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononCreateCustomWorkoutauth0Function/SubscriptiononCreateCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateCustomWorkoutauth0FunctionSubscriptiononCreateCustomWorkoutauth0FunctionAppSyncFunctionC990CE5B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononCreateCustomWorkoutpostAuth0Function/SubscriptiononCreateCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateCustomWorkoutpostAuth0FunctionSubscriptiononCreateCustomWorkoutpostAuth0FunctionAppSyncFunctionB54E2183"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnCreateCustomWorkoutDataResolverFn/SubscriptionOnCreateCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateCustomWorkoutDataResolverFnSubscriptionOnCreateCustomWorkoutDataResolverFnAppSyncFunction4C20185C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnCreateCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononUpdateCustomWorkoutauth0Function/SubscriptiononUpdateCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateCustomWorkoutauth0FunctionSubscriptiononUpdateCustomWorkoutauth0FunctionAppSyncFunction75B4972F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononUpdateCustomWorkoutpostAuth0Function/SubscriptiononUpdateCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateCustomWorkoutpostAuth0FunctionSubscriptiononUpdateCustomWorkoutpostAuth0FunctionAppSyncFunction66682D22"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnUpdateCustomWorkoutDataResolverFn/SubscriptionOnUpdateCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateCustomWorkoutDataResolverFnSubscriptionOnUpdateCustomWorkoutDataResolverFnAppSyncFunctionEA3A7522"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnUpdateCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononDeleteCustomWorkoutauth0Function/SubscriptiononDeleteCustomWorkoutauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteCustomWorkoutauth0FunctionSubscriptiononDeleteCustomWorkoutauth0FunctionAppSyncFunction39DCE7FE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteCustomWorkoutauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononDeleteCustomWorkoutpostAuth0Function/SubscriptiononDeleteCustomWorkoutpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteCustomWorkoutpostAuth0FunctionSubscriptiononDeleteCustomWorkoutpostAuth0FunctionAppSyncFunctionB881207F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteCustomWorkoutpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnDeleteCustomWorkoutDataResolverFn/SubscriptionOnDeleteCustomWorkoutDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteCustomWorkoutDataResolverFnSubscriptionOnDeleteCustomWorkoutDataResolverFnAppSyncFunction51F753FC"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteCustomWorkoutDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnDeleteCustomWorkoutResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteCustomWorkoutResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteCustomWorkout"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutOwnerDataResolverFn/CustomWorkoutOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomWorkoutOwnerDataResolverFnCustomWorkoutOwnerDataResolverFnAppSyncFunction324418FB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkoutOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/customWorkoutOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomWorkoutownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "CustomWorkout.owner"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4AAF43AEOutputs.amplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEventD2061852Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4AAF43AEOutputsamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerTableMana50F05BE8"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputs.amplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputs.amplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/reference-to-amplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputs.amplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout.NestedStack/CustomWorkout.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataCustomWorkoutNestedStackCustomWorkoutNestedStackResource6004956D"
           }
         ],
         "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [

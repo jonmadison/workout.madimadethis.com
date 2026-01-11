@@ -18,6 +18,22 @@ const schema = a.schema({
       allow.owner().to(['create', 'read', 'update', 'delete']),
     ])
     .identifier(['userId', 'workoutDate']),
+
+  CustomWorkout: a
+    .model({
+      userId: a.string().required(),
+      workoutId: a.id().required(),
+      name: a.string().required(),
+      author: a.string().required(),
+      isDefault: a.boolean().required(),
+      exercises: a.json().required(),
+      createdAt: a.string(),
+      updatedAt: a.string(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'update', 'delete']),
+    ])
+    .identifier(['userId', 'workoutId']),
 });
 
 export type Schema = ClientSchema<typeof schema>;
