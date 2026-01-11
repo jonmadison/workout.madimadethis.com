@@ -15,6 +15,7 @@ import {
   setSelectedWorkoutId,
   seedDefaultWorkout,
 } from './services/workoutLibraryService'
+import { getTodaysWorkout } from './services/workoutService'
 import './App.css'
 
 function AppContent({ user, onLogout }) {
@@ -26,6 +27,7 @@ function AppContent({ user, onLogout }) {
   const [showWorkoutSelector, setShowWorkoutSelector] = useState(false)
   const [showWorkoutEditor, setShowWorkoutEditor] = useState(false)
   const [editingWorkout, setEditingWorkout] = useState(null)
+  const [workoutCompletedToday, setWorkoutCompletedToday] = useState(false)
 
   // Check localStorage on mount to restore workout state
   useEffect(() => {
@@ -78,8 +80,19 @@ function AppContent({ user, onLogout }) {
   useEffect(() => {
     if (user) {
       loadWorkouts(user)
+      checkTodaysWorkout(user)
     }
   }, [user])
+
+  // Check if today's workout is completed
+  const checkTodaysWorkout = async (user) => {
+    if (!user) return
+
+    const result = await getTodaysWorkout(user.username)
+    if (result.success) {
+      setWorkoutCompletedToday(result.completed)
+    }
+  }
 
   const handleStartWorkout = () => {
     setWorkoutState(null)
@@ -90,6 +103,10 @@ function AppContent({ user, onLogout }) {
     localStorage.removeItem('workoutState')
     setWorkoutState(null)
     setIsWorkoutActive(false)
+    // Refresh today's workout status after completion
+    if (user) {
+      checkTodaysWorkout(user)
+    }
   }
 
   const handleGoHome = () => {
@@ -193,6 +210,7 @@ function AppContent({ user, onLogout }) {
             workoutAuthor={currentWorkout.author}
             onSwapWorkout={handleSwapWorkout}
             onEditWorkout={handleEditWorkout}
+            completedToday={workoutCompletedToday}
           />
           <Controls onStartWorkout={handleStartWorkout} />
         </div>

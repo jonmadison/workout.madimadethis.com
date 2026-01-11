@@ -1,6 +1,6 @@
 import { MdOutlineSwapHorizontalCircle, MdEdit } from 'react-icons/md';
 
-function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditWorkout }) {
+function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditWorkout, completedToday }) {
   const today = new Date();
   const formattedDate = today.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -35,7 +35,14 @@ function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditW
         </div>
         <div className="space-y-4">
           {exercises.map((exercise) => (
-          <div key={exercise.order} className="rounded-lg p-4" style={{ backgroundColor: '#FEFEFD' }}>
+          <div
+            key={exercise.order}
+            className="rounded-lg p-4"
+            style={{
+              backgroundColor: '#FEFEFD',
+              borderTop: completedToday ? '4px solid #10b981' : 'none'
+            }}
+          >
             <div className="flex flex-col">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-xl font-medium text-gray-900">{exercise.order}. {exercise.exercise}</h3>

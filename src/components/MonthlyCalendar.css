@@ -37,6 +37,15 @@
   color: white;
 }
 
+.monthly-calendar .react-calendar__tile.has-workout {
+  background-color: #d1fae5;
+}
+
+.monthly-calendar .react-calendar__tile.has-workout:enabled:hover,
+.monthly-calendar .react-calendar__tile.has-workout:enabled:focus {
+  background-color: #a7f3d0;
+}
+
 .workout-indicator {
   display: flex;
   justify-content: center;

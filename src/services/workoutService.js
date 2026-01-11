@@ -96,6 +96,24 @@ export async function syncPendingWorkouts() {
   };
 }
 
+// Get today's workout (if completed)
+export async function getTodaysWorkout(userId) {
+  try {
+    const today = new Date();
+    const todayISO = today.toISOString();
+
+    const { data: workout } = await client.models.WorkoutHistory.get({
+      userId,
+      workoutDate: todayISO,
+    });
+
+    return { success: true, workout, completed: !!workout };
+  } catch (error) {
+    // If no workout found, that's ok - just means not completed today
+    return { success: true, workout: null, completed: false };
+  }
+}
+
 // Helper function to get month range
 function getMonthRange(year, month) {
   const startDate = new Date(year, month, 1);
