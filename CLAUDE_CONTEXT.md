@@ -237,6 +237,20 @@ npx ampx sandbox
 # - Generates amplify_outputs.json with sandbox endpoints
 ```
 
+**Testing Backend Changes Locally:**
+```bash
+# Test if backend can be synthesized (won't deploy, just validates)
+npx ampx sandbox --once
+
+# This will:
+# - Synthesize your backend code
+# - Run type checks
+# - Show any errors in amplify/backend.ts or resource files
+# - Exit without deploying
+
+# Use this to validate backend changes before pushing to GitHub Actions
+```
+
 **Production Deployment:**
 
 Backend deployment is **automated via GitHub Actions**. See `.github/AMPLIFY_DEPLOY_SETUP.md` for detailed setup instructions.
