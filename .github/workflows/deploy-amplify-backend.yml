@@ -13,6 +13,10 @@ jobs:
   deploy-backend:
     runs-on: ubuntu-latest
 
+    # Grant write permissions to push updated amplify_outputs.json
+    permissions:
+      contents: write
+
     # Prevent concurrent deployments
     concurrency:
       group: amplify-backend-deployment
