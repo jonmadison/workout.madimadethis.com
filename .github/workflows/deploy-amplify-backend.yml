@@ -70,9 +70,10 @@ jobs:
           if git diff --quiet amplify_outputs.json; then
             echo "No changes to amplify_outputs.json"
           else
+            # Pull latest changes first with autostash
+            git pull --rebase --autostash origin main
+            # Now add and commit
             git add amplify_outputs.json
             git commit -m "Update production Amplify backend config [skip ci]"
-            # Pull with rebase in case there are new commits
-            git pull --rebase origin main
             git push
           fi
