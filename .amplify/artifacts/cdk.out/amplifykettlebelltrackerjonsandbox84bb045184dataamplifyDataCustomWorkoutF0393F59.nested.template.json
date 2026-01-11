@@ -1,0 +1,2319 @@
+{
+ "Parameters": {
+  "DynamoDBModelTableReadIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of read IOPS the table should support."
+  },
+  "DynamoDBModelTableWriteIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of write IOPS the table should support."
+  },
+  "DynamoDBBillingMode": {
+   "Type": "String",
+   "Default": "PAY_PER_REQUEST",
+   "AllowedValues": [
+    "PAY_PER_REQUEST",
+    "PROVISIONED"
+   ],
+   "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes."
+  },
+  "DynamoDBEnablePointInTimeRecovery": {
+   "Type": "String",
+   "Default": "false",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Whether to enable Point in Time Recovery on the table."
+  },
+  "DynamoDBEnableServerSideEncryption": {
+   "Type": "String",
+   "Default": "true",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Enable server side encryption powered by KMS."
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4AAF43AEOutputsamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerTableMana50F05BE8": {
+   "Type": "String"
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId": {
+   "Type": "String"
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName": {
+   "Type": "String"
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef": {
+   "Type": "String"
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref": {
+   "Type": "String"
+  }
+ },
+ "Conditions": {
+  "HasEnvironmentParameter": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      "NONE",
+      "NONE"
+     ]
+    }
+   ]
+  },
+  "ShouldUsePayPerRequestBilling": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBBillingMode"
+    },
+    "PAY_PER_REQUEST"
+   ]
+  },
+  "ShouldUsePointInTimeRecovery": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBEnablePointInTimeRecovery"
+    },
+    "true"
+   ]
+  },
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Resources": {
+  "CustomWorkoutTable": {
+   "Type": "Custom::AmplifyDynamoDBTable",
+   "Properties": {
+    "ServiceToken": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4AAF43AEOutputsamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataAmplifyTableManagerTableMana50F05BE8"
+    },
+    "tableName": {
+     "Fn::Join": [
+      "",
+      [
+       "CustomWorkout-",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "attributeDefinitions": [
+     {
+      "attributeName": "userId",
+      "attributeType": "S"
+     },
+     {
+      "attributeName": "workoutId",
+      "attributeType": "S"
+     }
+    ],
+    "keySchema": [
+     {
+      "attributeName": "userId",
+      "keyType": "HASH"
+     },
+     {
+      "attributeName": "workoutId",
+      "keyType": "RANGE"
+     }
+    ],
+    "provisionedThroughput": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      {
+       "Ref": "AWS::NoValue"
+      },
+      {
+       "ReadCapacityUnits": {
+        "Ref": "DynamoDBModelTableReadIOPS"
+       },
+       "WriteCapacityUnits": {
+        "Ref": "DynamoDBModelTableWriteIOPS"
+       }
+      }
+     ]
+    },
+    "sseSpecification": {
+     "sseEnabled": false
+    },
+    "streamSpecification": {
+     "streamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "deletionProtectionEnabled": false,
+    "allowDestructiveGraphqlSchemaUpdates": true,
+    "replaceTableUponGsiUpdate": true,
+    "pointInTimeRecoverySpecification": {
+     "Fn::If": [
+      "ShouldUsePointInTimeRecovery",
+      {
+       "PointInTimeRecoveryEnabled": true
+      },
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    },
+    "billingMode": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      "PAY_PER_REQUEST",
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutTable/Default/Default"
+   }
+  },
+  "CustomWorkoutIAMRole2E096FA0": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appsync.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:ConditionCheckItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "CustomWorkout-",
+                {
+                 "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}/*",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "CustomWorkout-",
+                {
+                 "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "DynamoDBAccess"
+     }
+    ],
+    "RoleName": {
+     "Fn::Join": [
+      "",
+      [
+       "CustomWorkoutIAMRole2fb773-",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "amplifyData"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutIAMRole/Resource"
+   }
+  },
+  "CustomWorkoutDataSource": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DynamoDBConfig": {
+     "AwsRegion": {
+      "Ref": "AWS::Region"
+     },
+     "TableName": {
+      "Fn::Select": [
+       1,
+       {
+        "Fn::Split": [
+         "/",
+         {
+          "Fn::Select": [
+           5,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::GetAtt": [
+               "CustomWorkoutTable",
+               "TableArn"
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "Name": "CustomWorkoutTable",
+    "ServiceRoleArn": {
+     "Fn::GetAtt": [
+      "CustomWorkoutIAMRole2E096FA0",
+      "Arn"
+     ]
+    },
+    "Type": "AMAZON_DYNAMODB"
+   },
+   "DependsOn": [
+    "CustomWorkoutIAMRole2E096FA0"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutDataSource/Resource"
+   }
+  },
+  "QuerygetCustomWorkoutpreAuth0FunctionQuerygetCustomWorkoutpreAuth0FunctionAppSyncFunction71F0268F": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetCustomWorkoutpreAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d6d662f9f031339d128741e106d2075c604100bd185658e20e32b3e961810434.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutpreAuth0Function/QuerygetCustomWorkoutpreAuth0Function.AppSyncFunction"
+   }
+  },
+  "QuerygetCustomWorkoutauth0FunctionQuerygetCustomWorkoutauth0FunctionAppSyncFunction5FCAFC33": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6b25c9b572c67e0f7ad41cb8019a90825f3db4b02a0a15b837c7a82dcb302060.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutauth0Function/QuerygetCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerygetCustomWorkoutpostAuth0FunctionQuerygetCustomWorkoutpostAuth0FunctionAppSyncFunction3CC90626": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerygetCustomWorkoutpostAuth0Function/QuerygetCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryGetCustomWorkoutDataResolverFnQueryGetCustomWorkoutDataResolverFnAppSyncFunction9DD70648": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryGetCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/08f4d557693d96c1a4efba0f9dc91330e4b19772fd5477c156468843e3d9cb5e.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4c6a2d29f01c6091bd1d9afe16e5849d456c96f17c3b215938c8067399532719.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QueryGetCustomWorkoutDataResolverFn/QueryGetCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "GetCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "getCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerygetCustomWorkoutpreAuth0FunctionQuerygetCustomWorkoutpreAuth0FunctionAppSyncFunction71F0268F",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerygetCustomWorkoutauth0FunctionQuerygetCustomWorkoutauth0FunctionAppSyncFunction5FCAFC33",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerygetCustomWorkoutpostAuth0FunctionQuerygetCustomWorkoutpostAuth0FunctionAppSyncFunction3CC90626",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryGetCustomWorkoutDataResolverFnQueryGetCustomWorkoutDataResolverFnAppSyncFunction9DD70648",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "CustomWorkoutTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/queryGetCustomWorkoutResolver"
+   }
+  },
+  "QuerylistCustomWorkoutspreAuth0FunctionQuerylistCustomWorkoutspreAuth0FunctionAppSyncFunction08302BA1": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistCustomWorkoutspreAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e74b48ae8b429004f2151eb4b9149b83236855d7ce6357f814c4a504091ae2b8.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutspreAuth0Function/QuerylistCustomWorkoutspreAuth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistCustomWorkoutsauth0FunctionQuerylistCustomWorkoutsauth0FunctionAppSyncFunctionDF2A29B1": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistCustomWorkoutsauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6b25c9b572c67e0f7ad41cb8019a90825f3db4b02a0a15b837c7a82dcb302060.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutsauth0Function/QuerylistCustomWorkoutsauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistCustomWorkoutspostAuth0FunctionQuerylistCustomWorkoutspostAuth0FunctionAppSyncFunction94F600AD": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistCustomWorkoutspostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QuerylistCustomWorkoutspostAuth0Function/QuerylistCustomWorkoutspostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryListCustomWorkoutsDataResolverFnQueryListCustomWorkoutsDataResolverFnAppSyncFunction3807A87A": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryListCustomWorkoutsDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9fcbe070ecd3023c5bf5b966fa9584757db9762eef123bad0820bd87591b2174.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cc01911d0269d4080ea57505dc445dfc315ef7ad85d3d9d4ea1357858bff451d.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/QueryListCustomWorkoutsDataResolverFn/QueryListCustomWorkoutsDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ListCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "listCustomWorkouts",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerylistCustomWorkoutspreAuth0FunctionQuerylistCustomWorkoutspreAuth0FunctionAppSyncFunction08302BA1",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistCustomWorkoutsauth0FunctionQuerylistCustomWorkoutsauth0FunctionAppSyncFunctionDF2A29B1",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistCustomWorkoutspostAuth0FunctionQuerylistCustomWorkoutspostAuth0FunctionAppSyncFunction94F600AD",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryListCustomWorkoutsDataResolverFnQueryListCustomWorkoutsDataResolverFnAppSyncFunction3807A87A",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listCustomWorkouts\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "CustomWorkoutTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/queryListCustomWorkoutsResolver"
+   }
+  },
+  "MutationcreateCustomWorkoutinit0FunctionMutationcreateCustomWorkoutinit0FunctionAppSyncFunction81162340": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateCustomWorkoutinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3cf32e28e3985b88b598dacbcc9a81cbb12cab62b6507082eb20a0702d3c197e.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutinit0Function/MutationcreateCustomWorkoutinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateCustomWorkoutpreAuth0FunctionMutationcreateCustomWorkoutpreAuth0FunctionAppSyncFunction3E53EBB8": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateCustomWorkoutpreAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d5fbf9dd8b57d794a05422dd1350757caa3e3209b8bf9994392d3a11402a77b7.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutpreAuth0Function/MutationcreateCustomWorkoutpreAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateCustomWorkoutauth0FunctionMutationcreateCustomWorkoutauth0FunctionAppSyncFunction9F97D4EB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2674b396cbe6dd08ad0b355186f657dda09fa807c96357b7236795fe12fe6b08.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutauth0Function/MutationcreateCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateCustomWorkoutpostAuth0FunctionMutationcreateCustomWorkoutpostAuth0FunctionAppSyncFunction4FB1BC22": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationcreateCustomWorkoutpostAuth0Function/MutationcreateCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationCreateCustomWorkoutDataResolverFnMutationCreateCustomWorkoutDataResolverFnAppSyncFunctionFFC7F9FD": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationCreateCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ff7a16e51f50819827008a3805b09dac4d7e82f399a6c02c9cc99aa2abca0e87.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationCreateCustomWorkoutDataResolverFn/MutationCreateCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "CreateCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "createCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationcreateCustomWorkoutinit0FunctionMutationcreateCustomWorkoutinit0FunctionAppSyncFunction81162340",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateCustomWorkoutpreAuth0FunctionMutationcreateCustomWorkoutpreAuth0FunctionAppSyncFunction3E53EBB8",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateCustomWorkoutauth0FunctionMutationcreateCustomWorkoutauth0FunctionAppSyncFunction9F97D4EB",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateCustomWorkoutpostAuth0FunctionMutationcreateCustomWorkoutpostAuth0FunctionAppSyncFunction4FB1BC22",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationCreateCustomWorkoutDataResolverFnMutationCreateCustomWorkoutDataResolverFnAppSyncFunctionFFC7F9FD",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "CustomWorkoutTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationCreateCustomWorkoutResolver"
+   }
+  },
+  "MutationupdateCustomWorkoutinit0FunctionMutationupdateCustomWorkoutinit0FunctionAppSyncFunction0B534DC2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateCustomWorkoutinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06db846fd14e6fc371f22b12b5545ba8e2dbfeda85d8c8d586c71c282166657b.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutinit0Function/MutationupdateCustomWorkoutinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateCustomWorkoutpreAuth0FunctionMutationupdateCustomWorkoutpreAuth0FunctionAppSyncFunctionF50326F9": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateCustomWorkoutpreAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d5fbf9dd8b57d794a05422dd1350757caa3e3209b8bf9994392d3a11402a77b7.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutpreAuth0Function/MutationupdateCustomWorkoutpreAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateCustomWorkoutauth0FunctionMutationupdateCustomWorkoutauth0FunctionAppSyncFunction5A910787": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b5a5004100fc3a70e2a65ec8ba031290091e0b1dcc71c881babba9942c778cb7.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutauth0Function/MutationupdateCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateCustomWorkoutpostAuth0FunctionMutationupdateCustomWorkoutpostAuth0FunctionAppSyncFunction3836C52C": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationupdateCustomWorkoutpostAuth0Function/MutationupdateCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationUpdateCustomWorkoutDataResolverFnMutationUpdateCustomWorkoutDataResolverFnAppSyncFunction5278BB28": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationUpdateCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/474bf0776ec2164a13191d1a0a9e057154931e4918fea5086f49850d02a5371b.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationUpdateCustomWorkoutDataResolverFn/MutationUpdateCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UpdateCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "updateCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationupdateCustomWorkoutinit0FunctionMutationupdateCustomWorkoutinit0FunctionAppSyncFunction0B534DC2",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateCustomWorkoutpreAuth0FunctionMutationupdateCustomWorkoutpreAuth0FunctionAppSyncFunctionF50326F9",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateCustomWorkoutauth0FunctionMutationupdateCustomWorkoutauth0FunctionAppSyncFunction5A910787",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateCustomWorkoutpostAuth0FunctionMutationupdateCustomWorkoutpostAuth0FunctionAppSyncFunction3836C52C",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationUpdateCustomWorkoutDataResolverFnMutationUpdateCustomWorkoutDataResolverFnAppSyncFunction5278BB28",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "CustomWorkoutTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationUpdateCustomWorkoutResolver"
+   }
+  },
+  "MutationdeleteCustomWorkoutpreAuth0FunctionMutationdeleteCustomWorkoutpreAuth0FunctionAppSyncFunction90EC1619": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteCustomWorkoutpreAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3d45244df04c1e9f027ac284d57e4e371f490d74eb6633ab1affedfff4e130da.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutpreAuth0Function/MutationdeleteCustomWorkoutpreAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationdeleteCustomWorkoutauth0FunctionMutationdeleteCustomWorkoutauth0FunctionAppSyncFunction574DE189": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/867fb7d7eb8e4127b6d0136b82c5c3f74a52eb410297086859986f8e7e4b02aa.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutauth0Function/MutationdeleteCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationdeleteCustomWorkoutpostAuth0FunctionMutationdeleteCustomWorkoutpostAuth0FunctionAppSyncFunction403D7AAB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationdeleteCustomWorkoutpostAuth0Function/MutationdeleteCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationDeleteCustomWorkoutDataResolverFnMutationDeleteCustomWorkoutDataResolverFnAppSyncFunctionE6082DA7": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "CustomWorkoutDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationDeleteCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f7907d1209a2c9953a0c053df402c634e359546d70c7cc5c2e8e21ea734880f.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "CustomWorkoutDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/MutationDeleteCustomWorkoutDataResolverFn/MutationDeleteCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "DeleteCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "deleteCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteCustomWorkoutpreAuth0FunctionMutationdeleteCustomWorkoutpreAuth0FunctionAppSyncFunction90EC1619",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteCustomWorkoutauth0FunctionMutationdeleteCustomWorkoutauth0FunctionAppSyncFunction574DE189",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteCustomWorkoutpostAuth0FunctionMutationdeleteCustomWorkoutpostAuth0FunctionAppSyncFunction403D7AAB",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationDeleteCustomWorkoutDataResolverFnMutationDeleteCustomWorkoutDataResolverFnAppSyncFunctionE6082DA7",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "CustomWorkoutTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/mutationDeleteCustomWorkoutResolver"
+   }
+  },
+  "SubscriptiononCreateCustomWorkoutauth0FunctionSubscriptiononCreateCustomWorkoutauth0FunctionAppSyncFunctionC990CE5B": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononCreateCustomWorkoutauth0Function/SubscriptiononCreateCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateCustomWorkoutpostAuth0FunctionSubscriptiononCreateCustomWorkoutpostAuth0FunctionAppSyncFunctionB54E2183": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononCreateCustomWorkoutpostAuth0Function/SubscriptiononCreateCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnCreateCustomWorkoutDataResolverFnSubscriptionOnCreateCustomWorkoutDataResolverFnAppSyncFunction4C20185C": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnCreateCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnCreateCustomWorkoutDataResolverFn/SubscriptionOnCreateCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "onCreateCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateCustomWorkoutauth0FunctionSubscriptiononCreateCustomWorkoutauth0FunctionAppSyncFunctionC990CE5B",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateCustomWorkoutpostAuth0FunctionSubscriptiononCreateCustomWorkoutpostAuth0FunctionAppSyncFunctionB54E2183",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnCreateCustomWorkoutDataResolverFnSubscriptionOnCreateCustomWorkoutDataResolverFnAppSyncFunction4C20185C",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnCreateCustomWorkoutResolver"
+   }
+  },
+  "SubscriptiononUpdateCustomWorkoutauth0FunctionSubscriptiononUpdateCustomWorkoutauth0FunctionAppSyncFunction75B4972F": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononUpdateCustomWorkoutauth0Function/SubscriptiononUpdateCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateCustomWorkoutpostAuth0FunctionSubscriptiononUpdateCustomWorkoutpostAuth0FunctionAppSyncFunction66682D22": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononUpdateCustomWorkoutpostAuth0Function/SubscriptiononUpdateCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnUpdateCustomWorkoutDataResolverFnSubscriptionOnUpdateCustomWorkoutDataResolverFnAppSyncFunctionEA3A7522": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnUpdateCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnUpdateCustomWorkoutDataResolverFn/SubscriptionOnUpdateCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "onUpdateCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateCustomWorkoutauth0FunctionSubscriptiononUpdateCustomWorkoutauth0FunctionAppSyncFunction75B4972F",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateCustomWorkoutpostAuth0FunctionSubscriptiononUpdateCustomWorkoutpostAuth0FunctionAppSyncFunction66682D22",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnUpdateCustomWorkoutDataResolverFnSubscriptionOnUpdateCustomWorkoutDataResolverFnAppSyncFunctionEA3A7522",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnUpdateCustomWorkoutResolver"
+   }
+  },
+  "SubscriptiononDeleteCustomWorkoutauth0FunctionSubscriptiononDeleteCustomWorkoutauth0FunctionAppSyncFunction39DCE7FE": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteCustomWorkoutauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3b6d810ef43cdbd93ef462c40b0df0328b89e04f1473a4f82f1178da1f1d5aa0.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononDeleteCustomWorkoutauth0Function/SubscriptiononDeleteCustomWorkoutauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteCustomWorkoutpostAuth0FunctionSubscriptiononDeleteCustomWorkoutpostAuth0FunctionAppSyncFunctionB881207F": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteCustomWorkoutpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptiononDeleteCustomWorkoutpostAuth0Function/SubscriptiononDeleteCustomWorkoutpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnDeleteCustomWorkoutDataResolverFnSubscriptionOnDeleteCustomWorkoutDataResolverFnAppSyncFunction51F753FC": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnDeleteCustomWorkoutDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/SubscriptionOnDeleteCustomWorkoutDataResolverFn/SubscriptionOnDeleteCustomWorkoutDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteCustomWorkoutResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "onDeleteCustomWorkout",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteCustomWorkoutauth0FunctionSubscriptiononDeleteCustomWorkoutauth0FunctionAppSyncFunction39DCE7FE",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteCustomWorkoutpostAuth0FunctionSubscriptiononDeleteCustomWorkoutpostAuth0FunctionAppSyncFunctionB881207F",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnDeleteCustomWorkoutDataResolverFnSubscriptionOnDeleteCustomWorkoutDataResolverFnAppSyncFunction51F753FC",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteCustomWorkout\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/subscriptionOnDeleteCustomWorkoutResolver"
+   }
+  },
+  "CustomWorkoutOwnerDataResolverFnCustomWorkoutOwnerDataResolverFnAppSyncFunction324418FB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "CustomWorkoutOwnerDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/041534e5fd916595f752318f161512d7c7f83b9f2cf32d0f0be381c12253ff68.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/064303962e481067b44300212516363b99aaee539b6bafaf756fdd83ff0b60f0.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CustomWorkoutOwnerDataResolverFn/CustomWorkoutOwnerDataResolverFn.AppSyncFunction"
+   }
+  },
+  "CustomWorkoutownerResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "owner",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "CustomWorkoutOwnerDataResolverFnCustomWorkoutOwnerDataResolverFnAppSyncFunction324418FB",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"CustomWorkout\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "CustomWorkout"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/customWorkoutOwnerResolver"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQ0W6DMAxFv6XvwdvofmAF7bGb6N4rkxiUQhIUO50qxL8v0KnTnq6PfGVfu4Ry/wovO/zmQpuhGG0L85FYyJwE9aCqzn9iREdCcYUqeGPFBq8a4pCiJlUlluD+sPOPOo89z+bm0QXTwhe2Ix2QSVl0MDdhvLuzLgqniW9ew1xv9rqtUfD0GPmf3pPXa4icprN9irgl+t08XikuivdnZCZheFslMxySHkjWAMvq/UgyJVFbOx/bW98vygdDcOGna5nfAs+7C1tbxOTFOoLmrj947K/BNQEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/CustomWorkout/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "GetAttCustomWorkoutTableStreamArn": {
+   "Description": "Your DynamoDB table StreamArn.",
+   "Value": {
+    "Fn::GetAtt": [
+     "CustomWorkoutTable",
+     "TableStreamArn"
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "GetAtt:CustomWorkoutTable:StreamArn"
+      ]
+     ]
+    }
+   }
+  },
+  "GetAttCustomWorkoutTableName": {
+   "Description": "Your DynamoDB table name.",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "CustomWorkout-",
+      {
+       "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+      },
+      "-NONE"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "GetAtt:CustomWorkoutTable:Name"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

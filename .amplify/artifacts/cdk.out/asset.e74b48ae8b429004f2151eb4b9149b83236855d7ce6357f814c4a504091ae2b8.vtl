@@ -1,0 +1,62 @@
+## [Start] Set query expression for key **
+#if( $util.isNull($ctx.args.userId) && !$util.isNull($ctx.args.sortDirection) )
+  $util.error("When providing argument 'sortDirection' you must also provide argument 'userId'.", "InvalidArgumentsError")
+#end
+#set( $modelQueryExpression = {} )
+## [Start] Validate key arguments. **
+#if( !$util.isNull($ctx.args.workoutId) && $util.isNull($ctx.args.userId) )
+  $util.error("When providing argument 'workoutId' you must also provide arguments userId", "InvalidArgumentsError")
+#end
+## [End] Validate key arguments. **
+#if( !$util.isNull($ctx.args.userId) )
+  #set( $modelQueryExpression.expression = "#userId = :userId" )
+  #set( $modelQueryExpression.expressionNames = {
+  "#userId": "userId"
+} )
+  #set( $modelQueryExpression.expressionValues = {
+  ":userId": {
+      "S": "$ctx.args.userId"
+  }
+} )
+#end
+## [Start] Applying Key Condition **
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.beginsWith) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND begins_with(#sortKey, :sortKey)" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.beginsWith" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.between) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey BETWEEN :sortKey0 AND :sortKey1" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey0", { "S": "$ctx.args.workoutId.between[0]" }))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey1", { "S": "$ctx.args.workoutId.between[1]" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.eq) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey = :sortKey" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.eq" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.lt) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey < :sortKey" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.lt" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.le) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey <= :sortKey" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.le" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.gt) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey > :sortKey" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.gt" }))
+#end
+#if( !$util.isNull($ctx.args.workoutId) && !$util.isNull($ctx.args.workoutId.ge) )
+  #set( $modelQueryExpression.expression = "$modelQueryExpression.expression AND #sortKey >= :sortKey" )
+  $util.qr($modelQueryExpression.expressionNames.put("#sortKey", "workoutId"))
+  $util.qr($modelQueryExpression.expressionValues.put(":sortKey", { "S": "$ctx.args.workoutId.ge" }))
+#end
+## [End] Applying Key Condition **
+## [End] Set query expression for key **
+$util.qr($ctx.stash.put("modelQueryExpression", $modelQueryExpression))
+{}

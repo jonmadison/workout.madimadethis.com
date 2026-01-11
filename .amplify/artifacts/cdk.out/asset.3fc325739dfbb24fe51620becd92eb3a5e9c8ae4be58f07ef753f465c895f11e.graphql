@@ -1,0 +1,395 @@
+type WorkoutHistory @aws_iam @aws_cognito_user_pools {
+  userId: String!
+  workoutDate: String!
+  workoutId: ID!
+  routineName: String
+  routineAuthor: String
+  status: String
+  completedExercises: Int
+  totalExercises: Int
+  durationMinutes: Int
+  exercises: AWSJSON
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type CustomWorkout @aws_iam @aws_cognito_user_pools {
+  userId: String!
+  workoutId: ID!
+  name: String!
+  author: String!
+  isDefault: Boolean!
+  exercises: AWSJSON!
+  createdAt: String
+  updatedAt: String
+  owner: String
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelWorkoutHistoryConnection @aws_iam @aws_cognito_user_pools {
+  items: [WorkoutHistory]!
+  nextToken: String
+}
+
+input ModelWorkoutHistoryFilterInput {
+  userId: ModelStringInput
+  workoutDate: ModelStringInput
+  workoutId: ModelIDInput
+  routineName: ModelStringInput
+  routineAuthor: ModelStringInput
+  status: ModelStringInput
+  completedExercises: ModelIntInput
+  totalExercises: ModelIntInput
+  durationMinutes: ModelIntInput
+  exercises: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelWorkoutHistoryFilterInput]
+  or: [ModelWorkoutHistoryFilterInput]
+  not: ModelWorkoutHistoryFilterInput
+  owner: ModelStringInput
+}
+
+type Query {
+  getWorkoutHistory(userId: String!, workoutDate: String!): WorkoutHistory @aws_iam @aws_cognito_user_pools
+  listWorkoutHistories(userId: String, workoutDate: ModelStringKeyConditionInput, filter: ModelWorkoutHistoryFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelWorkoutHistoryConnection @aws_iam @aws_cognito_user_pools
+  getCustomWorkout(userId: String!, workoutId: ID!): CustomWorkout @aws_iam @aws_cognito_user_pools
+  listCustomWorkouts(userId: String, workoutId: ModelIDKeyConditionInput, filter: ModelCustomWorkoutFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelCustomWorkoutConnection @aws_iam @aws_cognito_user_pools
+}
+
+input ModelWorkoutHistoryConditionInput {
+  workoutId: ModelIDInput
+  routineName: ModelStringInput
+  routineAuthor: ModelStringInput
+  status: ModelStringInput
+  completedExercises: ModelIntInput
+  totalExercises: ModelIntInput
+  durationMinutes: ModelIntInput
+  exercises: ModelStringInput
+  and: [ModelWorkoutHistoryConditionInput]
+  or: [ModelWorkoutHistoryConditionInput]
+  not: ModelWorkoutHistoryConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateWorkoutHistoryInput {
+  userId: String!
+  workoutDate: String!
+  workoutId: ID!
+  routineName: String
+  routineAuthor: String
+  status: String
+  completedExercises: Int
+  totalExercises: Int
+  durationMinutes: Int
+  exercises: AWSJSON
+}
+
+input UpdateWorkoutHistoryInput {
+  userId: String!
+  workoutDate: String!
+  workoutId: ID
+  routineName: String
+  routineAuthor: String
+  status: String
+  completedExercises: Int
+  totalExercises: Int
+  durationMinutes: Int
+  exercises: AWSJSON
+}
+
+input DeleteWorkoutHistoryInput {
+  userId: String!
+  workoutDate: String!
+}
+
+type Mutation {
+  createWorkoutHistory(input: CreateWorkoutHistoryInput!, condition: ModelWorkoutHistoryConditionInput): WorkoutHistory @aws_iam @aws_cognito_user_pools
+  updateWorkoutHistory(input: UpdateWorkoutHistoryInput!, condition: ModelWorkoutHistoryConditionInput): WorkoutHistory @aws_iam @aws_cognito_user_pools
+  deleteWorkoutHistory(input: DeleteWorkoutHistoryInput!, condition: ModelWorkoutHistoryConditionInput): WorkoutHistory @aws_iam @aws_cognito_user_pools
+  createCustomWorkout(input: CreateCustomWorkoutInput!, condition: ModelCustomWorkoutConditionInput): CustomWorkout @aws_iam @aws_cognito_user_pools
+  updateCustomWorkout(input: UpdateCustomWorkoutInput!, condition: ModelCustomWorkoutConditionInput): CustomWorkout @aws_iam @aws_cognito_user_pools
+  deleteCustomWorkout(input: DeleteCustomWorkoutInput!, condition: ModelCustomWorkoutConditionInput): CustomWorkout @aws_iam @aws_cognito_user_pools
+}
+
+input ModelSubscriptionWorkoutHistoryFilterInput {
+  userId: ModelSubscriptionStringInput
+  workoutDate: ModelSubscriptionStringInput
+  workoutId: ModelSubscriptionIDInput
+  routineName: ModelSubscriptionStringInput
+  routineAuthor: ModelSubscriptionStringInput
+  status: ModelSubscriptionStringInput
+  completedExercises: ModelSubscriptionIntInput
+  totalExercises: ModelSubscriptionIntInput
+  durationMinutes: ModelSubscriptionIntInput
+  exercises: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionWorkoutHistoryFilterInput]
+  or: [ModelSubscriptionWorkoutHistoryFilterInput]
+  owner: ModelStringInput
+}
+
+type Subscription {
+  onCreateWorkoutHistory(filter: ModelSubscriptionWorkoutHistoryFilterInput, owner: String): WorkoutHistory @aws_subscribe(mutations: ["createWorkoutHistory"]) @aws_iam @aws_cognito_user_pools
+  onUpdateWorkoutHistory(filter: ModelSubscriptionWorkoutHistoryFilterInput, owner: String): WorkoutHistory @aws_subscribe(mutations: ["updateWorkoutHistory"]) @aws_iam @aws_cognito_user_pools
+  onDeleteWorkoutHistory(filter: ModelSubscriptionWorkoutHistoryFilterInput, owner: String): WorkoutHistory @aws_subscribe(mutations: ["deleteWorkoutHistory"]) @aws_iam @aws_cognito_user_pools
+  onCreateCustomWorkout(filter: ModelSubscriptionCustomWorkoutFilterInput, owner: String): CustomWorkout @aws_subscribe(mutations: ["createCustomWorkout"]) @aws_iam @aws_cognito_user_pools
+  onUpdateCustomWorkout(filter: ModelSubscriptionCustomWorkoutFilterInput, owner: String): CustomWorkout @aws_subscribe(mutations: ["updateCustomWorkout"]) @aws_iam @aws_cognito_user_pools
+  onDeleteCustomWorkout(filter: ModelSubscriptionCustomWorkoutFilterInput, owner: String): CustomWorkout @aws_subscribe(mutations: ["deleteCustomWorkout"]) @aws_iam @aws_cognito_user_pools
+}
+
+type ModelCustomWorkoutConnection @aws_iam @aws_cognito_user_pools {
+  items: [CustomWorkout]!
+  nextToken: String
+}
+
+input ModelCustomWorkoutFilterInput {
+  userId: ModelStringInput
+  workoutId: ModelIDInput
+  name: ModelStringInput
+  author: ModelStringInput
+  isDefault: ModelBooleanInput
+  exercises: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  id: ModelIDInput
+  and: [ModelCustomWorkoutFilterInput]
+  or: [ModelCustomWorkoutFilterInput]
+  not: ModelCustomWorkoutFilterInput
+  owner: ModelStringInput
+}
+
+input ModelCustomWorkoutConditionInput {
+  name: ModelStringInput
+  author: ModelStringInput
+  isDefault: ModelBooleanInput
+  exercises: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelCustomWorkoutConditionInput]
+  or: [ModelCustomWorkoutConditionInput]
+  not: ModelCustomWorkoutConditionInput
+  owner: ModelStringInput
+}
+
+input CreateCustomWorkoutInput {
+  userId: String!
+  workoutId: ID!
+  name: String!
+  author: String!
+  isDefault: Boolean!
+  exercises: AWSJSON!
+  createdAt: String
+  updatedAt: String
+}
+
+input UpdateCustomWorkoutInput {
+  userId: String!
+  workoutId: ID!
+  name: String
+  author: String
+  isDefault: Boolean
+  exercises: AWSJSON
+  createdAt: String
+  updatedAt: String
+}
+
+input DeleteCustomWorkoutInput {
+  userId: String!
+  workoutId: ID!
+}
+
+input ModelSubscriptionCustomWorkoutFilterInput {
+  userId: ModelSubscriptionStringInput
+  workoutId: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  author: ModelSubscriptionStringInput
+  isDefault: ModelSubscriptionBooleanInput
+  exercises: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  and: [ModelSubscriptionCustomWorkoutFilterInput]
+  or: [ModelSubscriptionCustomWorkoutFilterInput]
+  owner: ModelStringInput
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDKeyConditionInput {
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  between: [ID]
+  beginsWith: ID
+}
