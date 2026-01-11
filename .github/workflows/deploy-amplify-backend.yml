@@ -30,13 +30,15 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
 
       - name: Install Amplify backend dependencies
+        working-directory: ./amplify
         run: |
-          cd amplify
           npm ci
+          # Verify @aws-amplify/backend was installed
+          ls -la node_modules/@aws-amplify/ | head -10
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -46,7 +48,11 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy Amplify backend
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
         run: |
+          # Ensure ampx can resolve backend modules from amplify/node_modules
+          export NODE_PATH="$(pwd)/amplify/node_modules:$NODE_PATH"
           npx ampx pipeline-deploy \
             --branch main \
             --app-id ${{ secrets.AMPLIFY_APP_ID }}
