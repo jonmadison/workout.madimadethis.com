@@ -238,29 +238,42 @@ npx ampx sandbox
 ```
 
 **Production Deployment:**
+
+Backend deployment is **automated via GitHub Actions**. See `.github/AMPLIFY_DEPLOY_SETUP.md` for detailed setup instructions.
+
 ```bash
 # First-time setup (creates Amplify app in AWS)
-npx ampx pipeline-deploy --branch main
+AWS_PROFILE=jon aws amplify create-app \
+  --name kettlebell-tracker \
+  --region us-east-1 \
+  --platform WEB
 
-# This creates:
-# - Production Cognito User Pool
-# - Production DynamoDB tables (WorkoutHistory, CustomWorkout)
-# - Production AppSync GraphQL API with owner-based authorization
-# - Generates production amplify_outputs.json
+# Copy the appId from output
 
-# The command will output:
-# ✅ Amplify app created: <app-id>
-# ✅ Branch deployed: main
-# ✅ Backend resources available
+# Add GitHub secrets (Settings → Secrets → Actions):
+# - AWS_ACCESS_KEY_ID (from ~/.aws/credentials [jon] profile)
+# - AWS_SECRET_ACCESS_KEY (from ~/.aws/credentials [jon] profile)
+# - AMPLIFY_APP_ID (from create-app output above)
 
-# Subsequent backend updates (after changing amplify/data/resource.ts)
-npx ampx pipeline-deploy --branch main --app-id <your-app-id>
+# Push workflow to trigger first deployment
+git push origin main
 ```
+
+**Automated Deployment:**
+- Workflow: `.github/workflows/deploy-amplify-backend.yml`
+- Triggers:
+  - Push to main when `amplify/**` files change
+  - Manual trigger from GitHub Actions UI
+- Process:
+  1. Runs `npx ampx pipeline-deploy --branch main --app-id $AMPLIFY_APP_ID`
+  2. Creates/updates production Cognito, DynamoDB, AppSync
+  3. Commits updated `amplify_outputs.json` back to repo
+- GitHub Actions cost: ~3-5 min/deploy, <50 min/month = **$0** (free tier)
 
 **Important Notes:**
 - `npx ampx sandbox` is for **local dev only** - creates temporary resources
-- `npx ampx pipeline-deploy` deploys **permanent production resources**
-- After pipeline-deploy, rebuild frontend to include production amplify_outputs.json
+- Production deployment is **automated via GitHub Actions** (not run locally)
+- After backend deploy completes, pull latest and rebuild frontend to get new config
 - Amplify backend costs ~$1-2/month (Cognito free < 50k MAUs, DynamoDB ~$0.25/million ops, AppSync ~$4/million queries)
 
 ### Part 2: Frontend Deployment

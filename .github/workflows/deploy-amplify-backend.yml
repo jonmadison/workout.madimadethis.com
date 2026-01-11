@@ -1,0 +1,61 @@
+name: Deploy Amplify Backend
+
+on:
+  # Only run when amplify backend files change
+  push:
+    branches: [main]
+    paths:
+      - 'amplify/**'
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    # Prevent concurrent deployments
+    concurrency:
+      group: amplify-backend-deployment
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy Amplify backend
+        run: |
+          npx ampx pipeline-deploy \
+            --branch main \
+            --app-id ${{ secrets.AMPLIFY_APP_ID }}
+
+      - name: Commit updated amplify_outputs.json
+        run: |
+          git config --local user.email "jon@madisons.com"
+          git config --local user.name "GitHub Actions Bot"
+
+          # Only commit if file changed
+          if git diff --quiet amplify_outputs.json; then
+            echo "No changes to amplify_outputs.json"
+          else
+            git add amplify_outputs.json
+            git commit -m "Update production Amplify backend config [skip ci]"
+            git push
+          fi
