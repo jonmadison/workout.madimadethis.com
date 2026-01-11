@@ -10,7 +10,7 @@ function App() {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false)
 
   return (
-    <div className="h-full bg-gray-900 text-white overflow-hidden">
+    <div className="h-full bg-gray-100 text-gray-900 overflow-hidden">
       {!isWorkoutActive ? (
         <div className="h-full flex flex-col">
           <Header

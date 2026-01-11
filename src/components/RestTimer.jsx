@@ -26,9 +26,9 @@ function RestTimer({ duration, onComplete, onSkip }) {
   const percentage = ((duration - timeLeft) / duration) * 100
 
   return (
-    <div id="rest-timer" className="bg-gray-800 rounded-lg p-8">
+    <div id="rest-timer" className="bg-white rounded-lg p-8">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-yellow-400">Rest Time</h2>
+        <h2 className="text-2xl font-bold mb-4 text-yellow-600">Rest Time</h2>
 
         <div className="relative inline-flex items-center justify-center">
           <svg className="transform -rotate-90" width="240" height="240">
@@ -53,7 +53,7 @@ function RestTimer({ duration, onComplete, onSkip }) {
             />
           </svg>
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <span className="text-6xl font-bold text-white">
+            <span className="text-6xl font-bold text-gray-900">
               {minutes > 0 && `${minutes}:`}
               {seconds.toString().padStart(2, '0')}
             </span>
