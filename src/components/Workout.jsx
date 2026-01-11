@@ -1,7 +1,7 @@
 function Workout({ exercises, workoutName, workoutAuthor }) {
   return (
-    <div id="workout" className="flex-1 overflow-y-auto px-10 pt-6 pb-24">
-      <div className="max-w-2xl mx-auto">
+    <div id="workout" className="flex-1 overflow-y-auto pt-6 pb-24">
+      <div className="max-w-2xl mx-auto px-10">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-gray-900">{workoutName}</h2>
           <p className="text-sm text-gray-600">by {workoutAuthor}</p>
