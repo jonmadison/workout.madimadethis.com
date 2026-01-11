@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import RestTimer from './RestTimer'
 
-function WorkoutSession({ routine, onComplete }) {
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0)
-  const [completedSets, setCompletedSets] = useState(0)
-  const [isResting, setIsResting] = useState(false)
-  const [restTime, setRestTime] = useState(0)
+function WorkoutSession({ routine, onComplete, initialState }) {
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialState?.currentExerciseIndex || 0)
+  const [completedSets, setCompletedSets] = useState(initialState?.completedSets || 0)
+  const [isResting, setIsResting] = useState(initialState?.isResting || false)
+  const [restTime, setRestTime] = useState(initialState?.restTime || 0)
 
   const currentExercise = routine[currentExerciseIndex]
   const totalSets = parseInt(currentExercise.setsReps.split('x')[0])
@@ -38,6 +38,17 @@ function WorkoutSession({ routine, onComplete }) {
     setIsResting(false)
     setRestTime(0)
   }
+
+  // Save workout state to localStorage whenever it changes
+  useEffect(() => {
+    const state = {
+      currentExerciseIndex,
+      completedSets,
+      isResting,
+      restTime
+    }
+    localStorage.setItem('workoutState', JSON.stringify(state))
+  }, [currentExerciseIndex, completedSets, isResting, restTime])
 
   const progress = ((currentExerciseIndex * 100) / routine.length).toFixed(0)
 

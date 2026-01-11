@@ -1,8 +1,13 @@
-function Workout({ exercises }) {
+function Workout({ exercises, workoutName, workoutAuthor }) {
   return (
-    <div id="workout" className="flex-1 overflow-y-auto px-10 pt-10 pb-24">
-      <div className="max-w-2xl mx-auto space-y-4">
-        {exercises.map((exercise) => (
+    <div id="workout" className="flex-1 overflow-y-auto px-10 pt-6 pb-24">
+      <div className="max-w-2xl mx-auto">
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">{workoutName}</h2>
+          <p className="text-sm text-gray-600">by {workoutAuthor}</p>
+        </div>
+        <div className="space-y-4">
+          {exercises.map((exercise) => (
           <div key={exercise.order} className="bg-white rounded-lg p-4">
             <div className="flex flex-col">
               <div className="flex justify-between items-center mb-3">
@@ -21,7 +26,8 @@ function Workout({ exercises }) {
               </div>
             </div>
           </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )
