@@ -14,7 +14,9 @@ A React + Vite workout tracker app for kettlebell workouts with real-time rest t
 - **Frontend**: React 19.2.0 + Vite 7.2.4
 - **Styling**: Tailwind CSS 4.1.18 with @tailwindcss/postcss
 - **Font**: Nunito (Google Fonts, weight 200-800)
-- **Deployment**: AWS CDK (separate repo)
+- **Backend**: AWS Amplify Gen 2 (Cognito, DynamoDB, AppSync GraphQL)
+- **Frontend Deployment**: AWS CDK (separate repo)
+- **Backend Deployment**: Amplify CLI (npx ampx)
 
 ## Repository Structure
 
@@ -106,7 +108,44 @@ All scrollable sections use `pb-24` (96px) or `pb-32` (128px) bottom padding to 
 
 ## Data Structure
 
-### Workout Routine (workoutRoutine.json)
+### Backend Models (amplify/data/resource.ts)
+
+**CustomWorkout Model:**
+```typescript
+CustomWorkout: {
+  userId: string (PK),
+  workoutId: id (SK),
+  name: string,
+  author: string,
+  isDefault: boolean,
+  exercises: json, // JSON stringified array of exercise objects
+  createdAt: string,
+  updatedAt: string
+}
+```
+
+**WorkoutHistory Model:**
+```typescript
+WorkoutHistory: {
+  userId: string (PK),
+  workoutDate: string (SK), // ISO date string
+  workoutId: id,
+  routineName: string,
+  routineAuthor: string,
+  status: string, // "completed" or "abandoned"
+  completedExercises: integer,
+  totalExercises: integer,
+  durationMinutes: integer,
+  exercises: json // JSON stringified array with set completion data
+}
+```
+
+**Authorization:**
+- Both models use owner-based authorization
+- Users can only CRUD their own records
+- Cognito User Pool provides authentication
+
+### Workout Routine (workoutRoutine.json & Exercise Objects)
 ```json
 {
   "name": "Lifetime Kettlebell",
@@ -136,6 +175,8 @@ All scrollable sections use `pb-24` (96px) or `pb-32` (128px) bottom padding to 
   - `"single"`: One bell, no alternating
   - `"alternating"`: One bell, alternate arms
   - `"double"`: Two kettlebells
+
+**Important:** When saving to DynamoDB, the `exercises` array is JSON.stringify'd because Amplify Gen 2 requires json fields to be strings. The workoutLibraryService automatically handles serialization/deserialization.
 
 ## Styling Guidelines
 
@@ -176,7 +217,54 @@ npm run dev
 
 ## Deployment
 
-### Build & Deploy
+### Two-Part Deployment Architecture
+
+The app has **two separate deployment processes**:
+1. **Amplify Backend** (Cognito, DynamoDB, AppSync) - deployed via Amplify CLI
+2. **Frontend** (React app) - deployed via CDK to S3/CloudFront
+
+### Part 1: Amplify Backend Deployment
+
+**Local Development (Sandbox):**
+```bash
+# Run local Amplify sandbox for development
+npx ampx sandbox
+
+# This creates temporary resources:
+# - Cognito User Pool (dev)
+# - DynamoDB tables (dev)
+# - AppSync GraphQL API (dev)
+# - Generates amplify_outputs.json with sandbox endpoints
+```
+
+**Production Deployment:**
+```bash
+# First-time setup (creates Amplify app in AWS)
+npx ampx pipeline-deploy --branch main
+
+# This creates:
+# - Production Cognito User Pool
+# - Production DynamoDB tables (WorkoutHistory, CustomWorkout)
+# - Production AppSync GraphQL API with owner-based authorization
+# - Generates production amplify_outputs.json
+
+# The command will output:
+# ✅ Amplify app created: <app-id>
+# ✅ Branch deployed: main
+# ✅ Backend resources available
+
+# Subsequent backend updates (after changing amplify/data/resource.ts)
+npx ampx pipeline-deploy --branch main --app-id <your-app-id>
+```
+
+**Important Notes:**
+- `npx ampx sandbox` is for **local dev only** - creates temporary resources
+- `npx ampx pipeline-deploy` deploys **permanent production resources**
+- After pipeline-deploy, rebuild frontend to include production amplify_outputs.json
+- Amplify backend costs ~$1-2/month (Cognito free < 50k MAUs, DynamoDB ~$0.25/million ops, AppSync ~$4/million queries)
+
+### Part 2: Frontend Deployment
+
 ```bash
 # In main app repo
 npm run build
@@ -188,10 +276,29 @@ cd ../workout-deployment
 
 **Deploy Script Does:**
 1. Clones app repo
-2. Builds React app
-3. Deploys CDK stack to AWS (using AWS_PROFILE=jon)
-4. Uploads dist/ to S3
-5. Invalidates CloudFront cache
+2. Installs dependencies
+3. Builds React app (includes amplify_outputs.json from repo)
+4. Deploys CDK stack to AWS (using AWS_PROFILE=jon)
+5. Uploads dist/ to S3
+6. Invalidates CloudFront cache
+
+**Full Production Deployment Workflow:**
+```bash
+# 1. Deploy Amplify backend (if backend changed)
+npx ampx pipeline-deploy --branch main --app-id <your-app-id>
+
+# 2. Rebuild frontend with production config
+npm run build
+
+# 3. Commit updated amplify_outputs.json
+git add amplify_outputs.json
+git commit -m "Update production Amplify config"
+git push
+
+# 4. Deploy frontend via CDK
+cd ../workout-deployment
+./deploy.sh
+```
 
 **DNS Configuration:**
 - Domain managed on Dreamhost
@@ -201,14 +308,17 @@ cd ../workout-deployment
 ## Current State
 
 ### Working Features ✅
-- Home screen with scrollable exercise list
-- Fixed bottom "Start Workout" button (always visible)
-- Active workout session with set tracking
-- Rest timer with circular progress animation
-- Fixed workout buttons (Complete Set + End Workout)
-- Progress bar showing workout completion
-- Exercise list showing completed/current/upcoming
-- Nunito font loaded and applied
+- **Authentication**: Cognito User Pool with auto-sign-in in dev mode
+- **Home Screen**: Scrollable exercise list with workout selector
+- **Custom Workouts**: Fork/edit workouts with drag-drop reordering (@dnd-kit)
+- **Workout Library**: Grid view of all workouts (default + custom)
+- **Workout Session**: Active workout with set tracking
+- **Rest Timer**: Circular progress animation
+- **Progress Tracking**: Workout history saved to DynamoDB
+- **Calendar View**: Monthly view of completed workouts
+- **Cloud Sync**: All data syncs across devices via DynamoDB
+- **Owner-Based Auth**: Users can only access their own data
+- **Favicon**: Kettlebell logo
 - Mobile-friendly touch targets
 - No page-level scrolling (app-like behavior)
 
