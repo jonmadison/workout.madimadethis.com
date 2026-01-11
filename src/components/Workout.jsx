@@ -35,7 +35,7 @@ function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditW
         </div>
         <div className="space-y-4">
           {exercises.map((exercise) => (
-          <div key={exercise.order} className="bg-white rounded-lg p-4">
+          <div key={exercise.order} className="rounded-lg p-4" style={{ backgroundColor: '#FEFEFD' }}>
             <div className="flex flex-col">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-xl font-medium text-gray-900">{exercise.order}. {exercise.exercise}</h3>
