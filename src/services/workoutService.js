@@ -99,17 +99,25 @@ export async function syncPendingWorkouts() {
 // Get today's workout (if completed)
 export async function getTodaysWorkout(userId) {
   try {
-    const today = new Date();
-    const todayISO = today.toISOString();
+    const now = new Date();
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
-    const { data: workout } = await client.models.WorkoutHistory.get({
-      userId,
-      workoutDate: todayISO,
+    const { data: workouts } = await client.models.WorkoutHistory.list({
+      filter: {
+        userId: { eq: userId },
+        workoutDate: {
+          between: [startOfDay.toISOString(), endOfDay.toISOString()],
+        },
+      },
     });
 
-    return { success: true, workout, completed: !!workout };
+    // Check if any workout completed today (status === 'completed')
+    const completedToday = workouts?.some(w => w.status === 'completed');
+
+    return { success: true, workout: workouts?.[0] || null, completed: completedToday };
   } catch (error) {
-    // If no workout found, that's ok - just means not completed today
+    console.error('Failed to check today\'s workout:', error);
     return { success: true, workout: null, completed: false };
   }
 }

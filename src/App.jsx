@@ -11,6 +11,7 @@ import WorkoutEditor from './components/WorkoutEditor'
 import {
   getWorkouts,
   createWorkout,
+  updateWorkout,
   getSelectedWorkoutId,
   setSelectedWorkoutId,
   seedDefaultWorkout,
@@ -143,14 +144,23 @@ function AppContent({ user, onLogout }) {
   }
 
   const handleSaveWorkout = async (workoutData, user) => {
-    const newWorkout = {
-      userId: user.username,
-      workoutId: crypto.randomUUID(),
-      ...workoutData,
-      isDefault: false,
+    let result
+
+    // Check if we're editing an existing custom workout (not default)
+    if (editingWorkout && !editingWorkout.isDefault) {
+      // Update existing custom workout
+      result = await updateWorkout(editingWorkout.userId, editingWorkout.workoutId, workoutData)
+    } else {
+      // Create new workout (either new or forking a default)
+      const newWorkout = {
+        userId: user.username,
+        workoutId: crypto.randomUUID(),
+        ...workoutData,
+        isDefault: false,
+      }
+      result = await createWorkout(newWorkout)
     }
 
-    const result = await createWorkout(newWorkout)
     if (result.success) {
       await loadWorkouts(user)
       setShowWorkoutEditor(false)
