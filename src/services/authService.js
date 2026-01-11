@@ -53,9 +53,8 @@ export async function logoutUser() {
 }
 
 export async function autoSignInDefaultUser() {
-  const defaultUsername = import.meta.env.VITE_DEFAULT_USERNAME || '_default';
+  const defaultUsername = import.meta.env.VITE_DEFAULT_USERNAME || 'jon@workout.local';
   const defaultPassword = 'TempPassword123!';
-  const defaultEmail = 'jon@example.com';
   const defaultFirstName = import.meta.env.VITE_DEFAULT_USER_FIRSTNAME || 'Jon';
 
   try {
@@ -65,9 +64,8 @@ export async function autoSignInDefaultUser() {
       return signInResult;
     }
 
-    // If sign in fails, try to create the user
+    // If sign in fails, try to create the user (email is used as username)
     const signUpResult = await registerUser(defaultUsername, defaultPassword, {
-      email: defaultEmail,
       given_name: defaultFirstName,
     });
 

@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Workout from './components/Workout'
 import Controls from './components/Controls'
 import WorkoutSession from './components/WorkoutSession'
+import CalendarView from './components/CalendarView'
 import workoutRoutine from './data/workoutRoutine.json'
 import './App.css'
 
@@ -70,12 +71,15 @@ function App() {
                 currentView="workout"
                 onNavigate={handleNavigate}
                 onLogout={onLogout}
+                user={user}
               />
               <WorkoutSession
                 routine={workoutRoutine.exercises}
                 onComplete={handleCompleteWorkout}
                 initialState={workoutState}
                 user={user}
+                workoutName={workoutRoutine.name}
+                workoutAuthor={workoutRoutine.author}
               />
             </div>
           ) : currentView === 'home' ? (
@@ -87,6 +91,7 @@ function App() {
                 currentView={currentView}
                 onNavigate={handleNavigate}
                 onLogout={onLogout}
+                user={user}
               />
               <Workout
                 exercises={workoutRoutine.exercises}
@@ -96,7 +101,7 @@ function App() {
               <Controls onStartWorkout={handleStartWorkout} />
             </div>
           ) : currentView === 'calendar' ? (
-            // Calendar view (placeholder)
+            // Calendar view
             <div className="h-full flex flex-col">
               <Header
                 title="Kettlebell Tracker"
@@ -104,10 +109,9 @@ function App() {
                 currentView={currentView}
                 onNavigate={handleNavigate}
                 onLogout={onLogout}
+                user={user}
               />
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-gray-600">Calendar view coming soon...</p>
-              </div>
+              <CalendarView user={user} />
             </div>
           ) : null}
         </div>

@@ -1,7 +1,7 @@
 import logo from '../assets/ktrainer-logo.png'
 import Navigation from './Navigation'
 
-function Header({ title, onHomeClick, currentView, onNavigate, onLogout }) {
+function Header({ title, onHomeClick, currentView, onNavigate, onLogout, user }) {
   return (
     <div id="header" className="px-4 py-3 flex-shrink-0 bg-white border-b border-gray-200">
       <div className="max-w-2xl mx-auto flex items-center justify-between">
@@ -19,6 +19,7 @@ function Header({ title, onHomeClick, currentView, onNavigate, onLogout }) {
           currentView={currentView}
           onNavigate={onNavigate}
           onLogout={onLogout}
+          user={user}
         />
       </div>
     </div>

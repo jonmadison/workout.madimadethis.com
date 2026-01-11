@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import RestTimer from './RestTimer'
+import { saveWorkout } from '../services/workoutService'
 
-function WorkoutSession({ routine, onComplete, initialState }) {
+function WorkoutSession({ routine, onComplete, initialState, user, workoutName, workoutAuthor }) {
+  const [startTime] = useState(() => initialState?.startTime || new Date().toISOString())
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialState?.currentExerciseIndex || 0)
   const [completedSets, setCompletedSets] = useState(initialState?.completedSets || 0)
   const [isResting, setIsResting] = useState(initialState?.isResting || false)
@@ -20,7 +22,8 @@ function WorkoutSession({ routine, onComplete, initialState }) {
         setIsResting(true)
         setRestTime(currentExercise.rest)
       } else {
-        onComplete()
+        // Last exercise completed - save and complete
+        handleSaveAndComplete()
       }
     } else {
       setCompletedSets(newCompletedSets)
@@ -45,10 +48,79 @@ function WorkoutSession({ routine, onComplete, initialState }) {
       currentExerciseIndex,
       completedSets,
       isResting,
-      restTime
+      restTime,
+      startTime
     }
     localStorage.setItem('workoutState', JSON.stringify(state))
-  }, [currentExerciseIndex, completedSets, isResting, restTime])
+  }, [currentExerciseIndex, completedSets, isResting, restTime, startTime])
+
+  const handleSaveAndComplete = async () => {
+    try {
+      // Calculate duration
+      const endTime = new Date()
+      const start = new Date(startTime)
+      const durationMinutes = Math.round((endTime - start) / 1000 / 60)
+
+      // Determine status and count completed exercises
+      const isFullyCompleted = currentExerciseIndex === routine.length - 1 && completedSets >= parseInt(routine[currentExerciseIndex].setsReps.split('x')[0])
+      const completedExercisesCount = currentExerciseIndex + (isFullyCompleted ? 1 : 0)
+
+      // Build exercises array with completion status
+      const exercisesData = routine.map((exercise, index) => {
+        const totalSets = parseInt(exercise.setsReps.split('x')[0])
+        let exerciseCompletedSets = 0
+        let exerciseStatus = 'skipped'
+
+        if (index < currentExerciseIndex) {
+          // Previous exercises are fully completed
+          exerciseCompletedSets = totalSets
+          exerciseStatus = 'completed'
+        } else if (index === currentExerciseIndex) {
+          // Current exercise may be partial
+          exerciseCompletedSets = completedSets
+          if (completedSets >= totalSets) {
+            exerciseStatus = 'completed'
+          } else if (completedSets > 0) {
+            exerciseStatus = 'partial'
+          }
+        }
+
+        return {
+          order: exercise.order,
+          exercise: exercise.exercise,
+          setsReps: exercise.setsReps,
+          weight: exercise.weight,
+          completedSets: exerciseCompletedSets,
+          totalSets: totalSets,
+          status: exerciseStatus
+        }
+      })
+
+      // Build workout data object
+      const workoutData = {
+        userId: user.username,
+        workoutDate: startTime,
+        workoutId: crypto.randomUUID(),
+        routineName: workoutName,
+        routineAuthor: workoutAuthor,
+        status: isFullyCompleted ? 'completed' : 'partial',
+        completedExercises: completedExercisesCount,
+        totalExercises: routine.length,
+        durationMinutes: durationMinutes,
+        exercises: exercisesData
+      }
+
+      // Save to DynamoDB
+      await saveWorkout(workoutData)
+      console.log('Workout saved successfully:', workoutData)
+    } catch (error) {
+      console.error('Failed to save workout:', error)
+      // Continue with completion even if save fails (it's saved to localStorage by workoutService)
+    }
+
+    // Always call onComplete to end the workout
+    onComplete()
+  }
 
   const progress = ((currentExerciseIndex * 100) / routine.length).toFixed(0)
 
@@ -151,7 +223,7 @@ function WorkoutSession({ routine, onComplete, initialState }) {
             </button>
           )}
           <button
-            onClick={onComplete}
+            onClick={handleSaveAndComplete}
             className="w-full bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-full transition-colors min-h-[48px] shadow-lg"
           >
             End Workout

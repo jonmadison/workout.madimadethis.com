@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
 import { getAuthenticatedUser, autoSignInDefaultUser } from '../services/authService';
+import { syncPendingWorkouts } from '../services/workoutService';
 import LoginScreen from './LoginScreen';
-import amplifyConfig from '../amplifyconfiguration.json';
+import amplifyConfig from '../../amplify_outputs.json';
 
 // Configure Amplify
 Amplify.configure(amplifyConfig);
@@ -22,6 +23,10 @@ function AuthWrapper({ children }) {
 
       if (currentUser) {
         setUser(currentUser);
+        // Sync any pending offline workouts
+        syncPendingWorkouts().catch(err =>
+          console.error('Background sync failed:', err)
+        );
         setLoading(false);
         return;
       }
@@ -31,6 +36,10 @@ function AuthWrapper({ children }) {
         const result = await autoSignInDefaultUser();
         if (result.success && result.user) {
           setUser(result.user);
+          // Sync any pending offline workouts
+          syncPendingWorkouts().catch(err =>
+            console.error('Background sync failed:', err)
+          );
         }
       }
     } catch (error) {

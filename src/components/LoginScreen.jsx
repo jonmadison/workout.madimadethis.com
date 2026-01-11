@@ -1,29 +1,38 @@
-import { useState } from 'react';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { useState, useEffect } from 'react';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { getAuthenticatedUser } from '../services/authService';
 import logo from '../assets/ktrainer-logo.png';
 import '@aws-amplify/ui-react/styles.css';
 
+function LoginForm({ onAuthSuccess }) {
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (authStatus === 'authenticated') {
+        try {
+          const user = await getAuthenticatedUser();
+          if (user) {
+            onAuthSuccess(user);
+          }
+        } catch (err) {
+          console.error('Failed to get user information:', err);
+        }
+      }
+    };
+    checkAuth();
+  }, [authStatus, onAuthSuccess]);
+
+  return null;
+}
+
 function LoginScreen({ onAuthSuccess }) {
   const [error, setError] = useState(null);
-
-  const handleAuthStateChange = async (authState) => {
-    if (authState === 'authenticated') {
-      try {
-        const user = await getAuthenticatedUser();
-        if (user) {
-          onAuthSuccess(user);
-        }
-      } catch (err) {
-        setError('Failed to get user information');
-        console.error(err);
-      }
-    }
-  };
+  const allowSignups = import.meta.env.VITE_ALLOW_SIGNUPS === 'true';
 
   return (
-    <div className="h-full flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8">
+    <div className="h-full flex items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md">
         {/* Logo and branding */}
         <div className="text-center mb-8">
           <img
@@ -43,12 +52,13 @@ function LoginScreen({ onAuthSuccess }) {
 
         {/* Amplify Authenticator with custom styling */}
         <Authenticator
-          onAuthStateChange={handleAuthStateChange}
+          initialState={allowSignups ? undefined : 'signIn'}
+          hideSignUp={!allowSignups}
           components={{
             SignIn: {
               Header() {
                 return (
-                  <div className="text-center mb-4">
+                  <div className="text-center pt-6 pb-4">
                     <h2 className="text-xl font-semibold text-gray-900">Sign In</h2>
                   </div>
                 );
@@ -57,7 +67,7 @@ function LoginScreen({ onAuthSuccess }) {
             SignUp: {
               Header() {
                 return (
-                  <div className="text-center mb-4">
+                  <div className="text-center pt-6 pb-4">
                     <h2 className="text-xl font-semibold text-gray-900">Create Account</h2>
                   </div>
                 );
@@ -72,13 +82,24 @@ function LoginScreen({ onAuthSuccess }) {
             },
           }}
         >
-          {/* This won't render because we handle auth state in parent */}
-          {() => null}
+          <LoginForm onAuthSuccess={onAuthSuccess} />
         </Authenticator>
 
         {import.meta.env.DEV && (
-          <div className="mt-6 text-center text-sm text-gray-500">
-            <p>Development mode: Auto-login available</p>
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm font-semibold text-blue-900 mb-2">Development Mode</p>
+            <p className="text-xs text-blue-700">
+              The app will auto-create and sign you in as the default user on first load.
+            </p>
+            <p className="text-xs text-blue-700 mt-2">
+              If needed, sign in manually with:
+            </p>
+            <p className="text-xs font-mono text-blue-900 mt-1">
+              Email: <strong>jon@workout.local</strong>
+            </p>
+            <p className="text-xs font-mono text-blue-900">
+              Password: <strong>TempPassword123!</strong>
+            </p>
           </div>
         )}
       </div>
