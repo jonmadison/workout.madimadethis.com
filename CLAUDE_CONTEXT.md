@@ -215,6 +215,49 @@ npm run dev
 # Dev server: http://localhost:5173/
 ```
 
+**Local Development Authentication:**
+- Auto-signs in as default user in dev mode (see `autoSignInDefaultUser` in authService.js)
+- Production requires manual sign-in through Cognito Authenticator UI
+
+## User Management
+
+### Adding New Users (Production)
+
+**Option 1: AWS Console (Recommended for initial users)**
+```bash
+# 1. Go to AWS Cognito Console
+# 2. Navigate to: User Pools → kettlebell-tracker-* pool
+# 3. Click "Create user"
+# 4. Fill in:
+#    - Email: user@example.com
+#    - Send email invitation: Yes (or set temp password)
+# 5. User receives email and sets password on first login
+```
+
+**Option 2: AWS CLI**
+```bash
+# Get your User Pool ID
+AWS_PROFILE=jon aws cognito-idp list-user-pools --max-results 10 --region us-east-1
+
+# Create a user
+AWS_PROFILE=jon aws cognito-idp admin-create-user \
+  --user-pool-id <USER_POOL_ID> \
+  --username user@example.com \
+  --user-attributes Name=email,Value=user@example.com Name=email_verified,Value=true \
+  --temporary-password "TempPass123!" \
+  --region us-east-1
+
+# User must change password on first login
+```
+
+**Option 3: Self-Service Sign-Up (Future Enhancement)**
+Currently the app uses Amplify Authenticator with default configuration. To enable self-service sign-up:
+- Users can sign up directly through the app's login screen
+- Amplify Authenticator already includes sign-up UI
+- No code changes needed - it's already available in production!
+
+**Note:** In development mode (`npm run dev`), the app auto-signs in as a default test user via `autoSignInDefaultUser()` in authService.js.
+
 ## Deployment
 
 ### Two-Part Deployment Architecture
