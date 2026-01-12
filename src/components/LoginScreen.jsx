@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+import { resetPassword } from 'aws-amplify/auth';
 import { getAuthenticatedUser } from '../services/authService';
 import logo from '../assets/ktrainer-logo.png';
 import '@aws-amplify/ui-react/styles.css';
@@ -30,6 +31,31 @@ function LoginScreen({ onAuthSuccess }) {
   const [error, setError] = useState(null);
   const allowSignups = import.meta.env.VITE_ALLOW_SIGNUPS === 'true';
 
+  // Custom forgot password handler to check for FORCE_CHANGE_PASSWORD status
+  const services = {
+    async handleForgotPassword({ username }) {
+      try {
+        const output = await resetPassword({ username });
+        return output;
+      } catch (error) {
+        console.error('Forgot password error:', error);
+
+        // Check if error is due to user not completing initial password setup
+        if (error.name === 'InvalidParameterException' ||
+            error.message?.includes('Cannot reset password for the user') ||
+            error.message?.includes('temporary password')) {
+          throw new Error(
+            'Please sign in with your temporary password first to complete account setup. ' +
+            'After your first login, you can use the "Forgot Password" feature.'
+          );
+        }
+
+        // Re-throw other errors
+        throw error;
+      }
+    },
+  };
+
   return (
     <div className="h-full flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md">
@@ -54,6 +80,7 @@ function LoginScreen({ onAuthSuccess }) {
         <Authenticator
           initialState={allowSignups ? undefined : 'signIn'}
           hideSignUp={!allowSignups}
+          services={services}
           components={{
             SignIn: {
               Header() {
