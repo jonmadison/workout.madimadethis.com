@@ -105,28 +105,10 @@ function RestTimer({ duration, onComplete, onSkip, nextExercise, isOpen }) {
           {/* Skip Button */}
           <button
             onClick={onSkip}
-            className="w-full bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] uppercase tracking-wide mb-4"
+            className="w-full bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] uppercase tracking-wide"
           >
             Skip Rest
           </button>
-
-          {/* Next Exercise Mini-Card */}
-          {nextExercise && (
-            <div className="bg-gray-50 rounded-xl p-3 flex items-center">
-              {nextExercise.image && (
-                <img
-                  src={nextExercise.image}
-                  alt={nextExercise.exercise}
-                  className="w-12 h-12 object-contain rounded-lg bg-white mr-3"
-                />
-              )}
-              <div className="flex-1">
-                <p className="text-sm text-gray-500">Up Next:</p>
-                <p className="font-semibold text-gray-900">{nextExercise.exercise}</p>
-              </div>
-              <MdChevronRight size={24} className="text-gray-400" />
-            </div>
-          )}
         </div>
       </div>
     </>

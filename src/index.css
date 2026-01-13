@@ -14,4 +14,25 @@
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+
+  /* Optimize for portrait orientation */
+  @media screen and (orientation: landscape) and (max-height: 500px) {
+    body::before {
+      content: "Please rotate your device to portrait mode";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+  }
 }
