@@ -129,8 +129,9 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
         exercises: exercisesData
       }
 
-      await saveWorkout(workoutData)
+      const saveResult = await saveWorkout(workoutData)
       console.log('Workout saved successfully:', workoutData)
+      console.log('Save result:', saveResult)
     } catch (error) {
       console.error('Failed to save workout:', error)
     }
