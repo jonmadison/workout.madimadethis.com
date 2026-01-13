@@ -38,6 +38,13 @@
         "WorkoutHistory": {
           "name": "WorkoutHistory",
           "fields": {
+            "workoutId": {
+              "name": "workoutId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
             "userId": {
               "name": "userId",
               "isArray": false,
@@ -48,14 +55,7 @@
             "workoutDate": {
               "name": "workoutDate",
               "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "workoutId": {
-              "name": "workoutId",
-              "isArray": false,
-              "type": "ID",
+              "type": "AWSDateTime",
               "isRequired": true,
               "attributes": []
             },
@@ -136,6 +136,16 @@
               "type": "key",
               "properties": {
                 "fields": [
+                  "workoutId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "workoutHistoriesByUserIdAndWorkoutDate",
+                "queryField": "listWorkoutHistoriesByUser",
+                "fields": [
                   "userId",
                   "workoutDate"
                 ]
@@ -163,10 +173,8 @@
           ],
           "primaryKeyInfo": {
             "isCustomPrimaryKey": true,
-            "primaryKeyFieldName": "userId",
-            "sortKeyFieldNames": [
-              "workoutDate"
-            ]
+            "primaryKeyFieldName": "workoutId",
+            "sortKeyFieldNames": []
           }
         },
         "CustomWorkout": {
