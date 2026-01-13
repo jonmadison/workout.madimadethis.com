@@ -5,13 +5,18 @@ function ExerciseCard({ exercise, completedSets = 0 }) {
 
   return (
     <div
-      className="rounded-2xl flex flex-col"
+      className="rounded-2xl flex flex-col relative overflow-hidden"
       style={{
         backgroundColor: '#fcfcfc',
-        padding: '12px',
+        padding: '20px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
       }}
     >
+      {/* Order number */}
+      <span className="absolute text-sm text-gray-400 opacity-50" style={{ fontFamily: 'Impact, sans-serif', top: '24px', right: '24px' }}>
+        {exercise.order}
+      </span>
+
       {/* Exercise image */}
       <div className="flex justify-center mb-1">
         {exercise.image && (
