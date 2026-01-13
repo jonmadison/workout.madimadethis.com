@@ -193,7 +193,7 @@ function AppContent({ user, onLogout }) {
   }
 
   return (
-    <div className="h-full bg-gray-100 text-gray-900 overflow-hidden">
+    <div className="h-full bg-gray-100 text-gray-900 overflow-hidden max-w-[640px] mx-auto">
       {currentView === 'workout' && isWorkoutActive ? (
         // Workout session view
         <div className="h-full flex flex-col">

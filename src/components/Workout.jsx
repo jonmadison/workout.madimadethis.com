@@ -74,7 +74,7 @@ function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onStart
             <>
               <button
                 onClick={onResumeWorkout}
-                className="w-full bg-emerald-200 hover:bg-emerald-300 text-gray-800 font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg uppercase tracking-wide"
+                className="w-full bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg uppercase tracking-wide"
               >
                 Resume Workout
               </button>
@@ -88,7 +88,7 @@ function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onStart
           ) : (
             <button
               onClick={onStartWorkout}
-              className="w-full bg-emerald-200 hover:bg-emerald-300 text-gray-800 font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg uppercase tracking-wide"
+              className="w-full bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg uppercase tracking-wide"
             >
               Start Workout
             </button>
