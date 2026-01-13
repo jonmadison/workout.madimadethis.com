@@ -22,7 +22,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/32b7b5c63424a95809ae110f7344d567897f24f89f2beade0e50423def38716e.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ec4212ac461a6835006ce1a74dbed13d3921e856046cc40caeafdd72dc2fe87f.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -877,6 +877,46 @@
           {
             "type": "graphqltransformer:resourceName",
             "data": "Subscription.onDeleteWorkoutHistory"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QuerylistWorkoutHistoriesByUserauth0Function/QuerylistWorkoutHistoriesByUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWorkoutHistoriesByUserauth0FunctionQuerylistWorkoutHistoriesByUserauth0FunctionAppSyncFunction2FDF8216"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWorkoutHistoriesByUserauth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QuerylistWorkoutHistoriesByUserpostAuth0Function/QuerylistWorkoutHistoriesByUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWorkoutHistoriesByUserpostAuth0FunctionQuerylistWorkoutHistoriesByUserpostAuth0FunctionAppSyncFunction83730E57"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWorkoutHistoriesByUserpostAuth0Function"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QueryListWorkoutHistoriesByUserDataResolverFn/QueryListWorkoutHistoriesByUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListWorkoutHistoriesByUserDataResolverFnQueryListWorkoutHistoriesByUserDataResolverFnAppSyncFunction983BAB38"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListWorkoutHistoriesByUserDataResolverFn"
+          }
+        ],
+        "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/queryListWorkoutHistoriesByUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWorkoutHistoriesByUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listWorkoutHistoriesByUser"
           }
         ],
         "/amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/WorkoutHistoryOwnerDataResolverFn/WorkoutHistoryOwnerDataResolverFn.AppSyncFunction": [

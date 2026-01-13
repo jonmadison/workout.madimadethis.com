@@ -1,0 +1,25 @@
+type WorkoutHistory @model @auth(rules: [{allow: owner, operations: [create, read, update, delete], ownerField: "owner"}])
+{
+  workoutId: ID! @primaryKey
+  userId: String! @index(sortKeyFields: ["workoutDate"], queryField: "listWorkoutHistoriesByUser")
+  workoutDate: AWSDateTime!
+  routineName: String
+  routineAuthor: String
+  status: String
+  completedExercises: Int
+  totalExercises: Int
+  durationMinutes: Int
+  exercises: AWSJSON
+}
+
+type CustomWorkout @model @auth(rules: [{allow: owner, operations: [create, read, update, delete], ownerField: "owner"}])
+{
+  userId: String! @primaryKey(sortKeyFields: ["workoutId"])
+  workoutId: ID!
+  name: String!
+  author: String!
+  isDefault: Boolean!
+  exercises: AWSJSON!
+  createdAt: String
+  updatedAt: String
+}

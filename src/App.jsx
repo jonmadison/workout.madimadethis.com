@@ -143,6 +143,27 @@ function AppContent({ user, onLogout }) {
     }
   }
 
+  // Build completed sets map from workout state for progress display
+  const getCompletedSetsMap = () => {
+    if (!workoutState || !currentWorkout) return {}
+
+    const map = {}
+    currentWorkout.exercises.forEach((exercise, index) => {
+      if (index < workoutState.currentExerciseIndex) {
+        // Previous exercises are fully completed
+        const totalSets = parseInt(exercise.setsReps.split('x')[0]) || 0
+        map[exercise.order] = totalSets
+      } else if (index === workoutState.currentExerciseIndex) {
+        // Current exercise shows partial progress
+        map[exercise.order] = workoutState.completedSets
+      } else {
+        // Future exercises have 0 completed
+        map[exercise.order] = 0
+      }
+    })
+    return map
+  }
+
   const handleWorkoutSelect = (workout) => {
     setCurrentWorkout(workout)
     setSelectedWorkoutId(workout.workoutId)
@@ -238,6 +259,7 @@ function AppContent({ user, onLogout }) {
             onStopWorkout={handleStopWorkout}
             isWorkoutInProgress={isWorkoutActive}
             completedToday={workoutCompletedToday}
+            completedSetsMap={getCompletedSetsMap()}
           />
         </div>
       ) : currentView === 'calendar' ? (

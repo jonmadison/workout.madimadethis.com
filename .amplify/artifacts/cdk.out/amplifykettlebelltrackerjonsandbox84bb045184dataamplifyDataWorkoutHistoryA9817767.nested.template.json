@@ -369,6 +369,10 @@
     },
     "attributeDefinitions": [
      {
+      "attributeName": "workoutId",
+      "attributeType": "S"
+     },
+     {
       "attributeName": "userId",
       "attributeType": "S"
      },
@@ -379,12 +383,42 @@
     ],
     "keySchema": [
      {
-      "attributeName": "userId",
+      "attributeName": "workoutId",
       "keyType": "HASH"
-     },
+     }
+    ],
+    "globalSecondaryIndexes": [
      {
-      "attributeName": "workoutDate",
-      "keyType": "RANGE"
+      "indexName": "workoutHistoriesByUserIdAndWorkoutDate",
+      "keySchema": [
+       {
+        "attributeName": "userId",
+        "keyType": "HASH"
+       },
+       {
+        "attributeName": "workoutDate",
+        "keyType": "RANGE"
+       }
+      ],
+      "projection": {
+       "projectionType": "ALL"
+      },
+      "provisionedThroughput": {
+       "Fn::If": [
+        "ShouldUsePayPerRequestBilling",
+        {
+         "Ref": "AWS::NoValue"
+        },
+        {
+         "ReadCapacityUnits": {
+          "Ref": "DynamoDBModelTableReadIOPS"
+         },
+         "WriteCapacityUnits": {
+          "Ref": "DynamoDBModelTableWriteIOPS"
+         }
+        }
+       ]
+      }
      }
     ],
     "provisionedThroughput": {
@@ -621,7 +655,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "QuerygetWorkoutHistorypreAuth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/70e3f93c60fddb9d6326f8fa59e98f198d42b2ab2b8e1efffa417ff8c53f1b94.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0f8186b80bec9116d9fe80f85b93d16e9f6b5ad395a878c24d7c2c4d280e8365.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -829,7 +863,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "QuerylistWorkoutHistoriespreAuth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2890328c2d2309a9c446361062ab6ed69f3dbc1ef4c9cb86592649aa6fc1b21b.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/07830a20fdbb288c93816a10fe07601e845dd9027e3a0a736b279ba26490d466.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -1059,7 +1093,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "MutationcreateWorkoutHistorypreAuth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/052640c3f911cf10bbeed1258b1edfcfce7d50fc68d4a13dc396175886b13698.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d61fe975c23c1ed76f6d704e3bd8d11d0fe74efa90031b66bebf8de9e6cc9f94.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -1081,7 +1115,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "MutationcreateWorkoutHistoryauth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c43cd820ea287d8b2a0f94559ec531433c03d0da5b93bce979342780fd4508f0.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6607f1efb6cddda852c4557b89070c374addc7c1ff68b8daca3488cb47d8df62.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -1128,7 +1162,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "MutationCreateWorkoutHistoryDataResolverFn",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c421ab7408a52de0f05b91fd5e9f11e519ff90bb0ff9c41817414b55c257484a.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/16a769b1bbec5c22d351cd1e06d20ddcde1ce8df30b276151818f0be7f9a11bd.vtl"
     },
     "ResponseMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
@@ -1295,7 +1329,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "MutationupdateWorkoutHistorypreAuth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/052640c3f911cf10bbeed1258b1edfcfce7d50fc68d4a13dc396175886b13698.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d61fe975c23c1ed76f6d704e3bd8d11d0fe74efa90031b66bebf8de9e6cc9f94.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -1323,7 +1357,7 @@
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
     },
     "ResponseMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cf5798a098a73b31d434cdde3a5e9d4a32fbc2ff3f3fc86ea74a2fb669e599bc.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2196b865bb75dea12a385e4ed14e1113148eee23fab1f5eb08d7d68309381946.vtl"
     }
    },
    "DependsOn": [
@@ -1517,7 +1551,7 @@
     "FunctionVersion": "2018-05-29",
     "Name": "MutationdeleteWorkoutHistorypreAuth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e7be762139fc33d02f031090eb5b324d42a7d9e2abb2a0c70c35661d05d3e0a0.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f117f8cd10d51efe0036095cea8f994ed28f6bc166c0ae015e5505b037b1c4c1.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
@@ -2160,6 +2194,186 @@
    "DeletionPolicy": "Delete",
    "Metadata": {
     "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/subscriptionOnDeleteWorkoutHistoryResolver"
+   }
+  },
+  "QuerylistWorkoutHistoriesByUserauth0FunctionQuerylistWorkoutHistoriesByUserauth0FunctionAppSyncFunction2FDF8216": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistWorkoutHistoriesByUserauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6b25c9b572c67e0f7ad41cb8019a90825f3db4b02a0a15b837c7a82dcb302060.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QuerylistWorkoutHistoriesByUserauth0Function/QuerylistWorkoutHistoriesByUserauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistWorkoutHistoriesByUserpostAuth0FunctionQuerylistWorkoutHistoriesByUserpostAuth0FunctionAppSyncFunction83730E57": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPINONEDSD0A70C8BName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistWorkoutHistoriesByUserpostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QuerylistWorkoutHistoriesByUserpostAuth0Function/QuerylistWorkoutHistoriesByUserpostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryListWorkoutHistoriesByUserDataResolverFnQueryListWorkoutHistoriesByUserDataResolverFnAppSyncFunction983BAB38": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WorkoutHistoryDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryListWorkoutHistoriesByUserDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06ff05959745544f4f6436472b9da98af6db22e9993f9fccd1ae706d08f9670d.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/098c998f215c333f57348ca8912f66057ae6b574fe34013033dc54362ee2372c.vtl"
+    }
+   },
+   "DependsOn": [
+    "WorkoutHistoryDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/QueryListWorkoutHistoriesByUserDataResolverFn/QueryListWorkoutHistoriesByUserDataResolverFn.AppSyncFunction"
+   }
+  },
+  "QuerylistWorkoutHistoriesByUserResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+    },
+    "FieldName": "listWorkoutHistoriesByUser",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerylistWorkoutHistoriesByUserauth0FunctionQuerylistWorkoutHistoriesByUserauth0FunctionAppSyncFunction2FDF8216",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistWorkoutHistoriesByUserpostAuth0FunctionQuerylistWorkoutHistoriesByUserpostAuth0FunctionAppSyncFunction83730E57",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryListWorkoutHistoriesByUserDataResolverFnQueryListWorkoutHistoriesByUserDataResolverFnAppSyncFunction983BAB38",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listWorkoutHistoriesByUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184dataamplifyDataGraphQLAPID22C63AAApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WorkoutHistoryTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthauthenticatedUserRole0D97462CRef"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthunauthenticatedUserRoleF2F6BED7Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifykettlebelltrackerjonsandbox84bb045184authNestedStackauthNestedStackResourceBC4FB767Outputsamplifykettlebelltrackerjonsandbox84bb045184authamplifyAuthIdentityPool6A9D1AB8Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-kettlebelltracker-jon-sandbox-84bb045184/data/amplifyData/WorkoutHistory/queryListWorkoutHistoriesByUserResolver"
    }
   },
   "WorkoutHistoryOwnerDataResolverFnWorkoutHistoryOwnerDataResolverFnAppSyncFunctionF17AC59C": {
