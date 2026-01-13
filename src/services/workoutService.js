@@ -20,12 +20,10 @@ export async function getWorkoutsByMonth(userId, year, month) {
   try {
     const { startDate, endDate } = getMonthRange(year, month);
 
-    const { data: workouts } = await client.models.WorkoutHistory.list({
-      filter: {
-        userId: { eq: userId },
-        workoutDate: {
-          between: [startDate, endDate],
-        },
+    const { data: workouts } = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
+      userId,
+      workoutDate: {
+        between: [startDate, endDate],
       },
     });
 
@@ -38,12 +36,10 @@ export async function getWorkoutsByMonth(userId, year, month) {
 
 export async function getWorkoutsByDateRange(userId, startDate, endDate) {
   try {
-    const { data: workouts } = await client.models.WorkoutHistory.list({
-      filter: {
-        userId: { eq: userId },
-        workoutDate: {
-          between: [startDate, endDate],
-        },
+    const { data: workouts } = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
+      userId,
+      workoutDate: {
+        between: [startDate, endDate],
       },
     });
 
@@ -56,12 +52,20 @@ export async function getWorkoutsByDateRange(userId, startDate, endDate) {
 
 export async function getWorkoutByDate(userId, date) {
   try {
-    const { data: workout } = await client.models.WorkoutHistory.get({
+    // Query for workouts on specific date using the secondary index
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const { data: workouts } = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
       userId,
-      workoutDate: date,
+      workoutDate: {
+        between: [startOfDay.toISOString(), endOfDay.toISOString()],
+      },
     });
 
-    return { success: true, workout };
+    return { success: true, workout: workouts?.[0] || null };
   } catch (error) {
     console.error('Failed to fetch workout:', error);
     return { success: false, workout: null, error: error.message };
@@ -109,12 +113,10 @@ export async function getTodaysWorkout(userId) {
       endOfDay: endOfDay.toISOString()
     });
 
-    const { data: workouts } = await client.models.WorkoutHistory.list({
-      filter: {
-        userId: { eq: userId },
-        workoutDate: {
-          between: [startOfDay.toISOString(), endOfDay.toISOString()],
-        },
+    const { data: workouts } = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
+      userId,
+      workoutDate: {
+        between: [startOfDay.toISOString(), endOfDay.toISOString()],
       },
     });
 
