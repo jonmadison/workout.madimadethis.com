@@ -98,6 +98,7 @@ function AppContent({ user, onLogout }) {
   const handleStartWorkout = () => {
     setWorkoutState(null)
     setIsWorkoutActive(true)
+    setCurrentView('workout')
   }
 
   const handleCompleteWorkout = () => {
@@ -111,22 +112,32 @@ function AppContent({ user, onLogout }) {
   }
 
   const handleGoHome = () => {
-    if (isWorkoutActive) {
-      const confirmExit = window.confirm('Are you sure you want to end your workout and go home?')
-      if (confirmExit) {
-        handleCompleteWorkout()
-      }
-    } else if (currentView !== 'home') {
-      setCurrentView('home')
-    }
+    setCurrentView('home')
   }
 
   const handleNavigate = (view) => {
-    if (isWorkoutActive) {
-      alert('Please complete or end your workout first')
-      return
-    }
     setCurrentView(view)
+  }
+
+  const handleResumeWorkout = () => {
+    // Read latest state from localStorage before resuming
+    const savedState = localStorage.getItem('workoutState')
+    if (savedState) {
+      try {
+        const parsedState = JSON.parse(savedState)
+        setWorkoutState(parsedState)
+      } catch (e) {
+        console.error('Failed to parse workout state:', e)
+      }
+    }
+    setCurrentView('workout')
+  }
+
+  const handleStopWorkout = () => {
+    const confirmStop = window.confirm('Are you sure you want to stop your current workout?')
+    if (confirmStop) {
+      handleCompleteWorkout()
+    }
   }
 
   const handleWorkoutSelect = (workout) => {
@@ -183,7 +194,7 @@ function AppContent({ user, onLogout }) {
 
   return (
     <div className="h-full bg-gray-100 text-gray-900 overflow-hidden">
-      {isWorkoutActive ? (
+      {currentView === 'workout' && isWorkoutActive ? (
         // Workout session view
         <div className="h-full flex flex-col">
           <Header
@@ -203,13 +214,13 @@ function AppContent({ user, onLogout }) {
             workoutAuthor={currentWorkout.author}
           />
         </div>
-      ) : currentView === 'home' ? (
+      ) : currentView === 'home' || (currentView === 'workout' && !isWorkoutActive) ? (
         // Home view
         <div className="h-full flex flex-col">
           <Header
             title="Kettlebell Tracker"
             onHomeClick={handleGoHome}
-            currentView={currentView}
+            currentView="home"
             onNavigate={handleNavigate}
             onLogout={onLogout}
             user={user}
@@ -219,10 +230,12 @@ function AppContent({ user, onLogout }) {
             workoutName={currentWorkout.name}
             workoutAuthor={currentWorkout.author}
             onSwapWorkout={handleSwapWorkout}
-            onEditWorkout={handleEditWorkout}
+            onStartWorkout={handleStartWorkout}
+            onResumeWorkout={handleResumeWorkout}
+            onStopWorkout={handleStopWorkout}
+            isWorkoutInProgress={isWorkoutActive}
             completedToday={workoutCompletedToday}
           />
-          <Controls onStartWorkout={handleStartWorkout} />
         </div>
       ) : currentView === 'calendar' ? (
         // Calendar view
