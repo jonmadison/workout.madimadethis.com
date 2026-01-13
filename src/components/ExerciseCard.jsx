@@ -1,45 +1,48 @@
-import { MdTimer } from 'react-icons/md';
+function ExerciseCard({ exercise, completedSets = 0 }) {
+  // Parse sets from setsReps (e.g., "5x15" -> 5)
+  const totalSets = parseInt(exercise.setsReps.split('x')[0]) || 0;
+  const progressPercent = totalSets > 0 ? (completedSets / totalSets) * 100 : 0;
 
-function ExerciseCard({ exercise, completedToday }) {
   return (
     <div
-      className="rounded-lg p-4 flex items-center gap-4"
+      className="rounded-2xl flex flex-col"
       style={{
         backgroundColor: '#fcfcfc',
-        borderTop: completedToday ? '4px solid #10b981' : 'none'
+        padding: '12px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
       }}
     >
-      {/* Large exercise number */}
-      <span
-        className="font-bold flex-shrink-0 text-emerald-200"
-        style={{ fontSize: '120px', lineHeight: 1, fontFamily: 'Impact, sans-serif', marginLeft: '32px' }}
-      >
-        {exercise.order}
-      </span>
-
       {/* Exercise image */}
-      {exercise.image && (
-        <img
-          src={exercise.image}
-          alt={exercise.exercise}
-          className="object-contain flex-shrink-0"
-          style={{ height: '120px', width: 'auto' }}
-        />
-      )}
-
-      {/* Exercise details */}
-      <div className="flex flex-col gap-1">
-        <h3 className="text-xl font-semibold text-teal-600 lowercase">
-          {exercise.exercise}
-        </h3>
-        <p className="text-gray-700 font-medium">
-          {exercise.setsReps} @ {exercise.weight}
-        </p>
-        <span className="flex items-center justify-center gap-1 text-gray-700">
-          <MdTimer size={18} />
-          <span style={{ fontSize: '18px' }}>{exercise.rest}s</span>
-        </span>
+      <div className="flex justify-center mb-1">
+        {exercise.image && (
+          <img
+            src={exercise.image}
+            alt={exercise.exercise}
+            className="object-contain"
+            style={{ height: '78px', width: 'auto' }}
+          />
+        )}
       </div>
+
+      {/* Exercise name */}
+      <h3 className="text-sm font-semibold text-gray-900 mb-0.5">
+        {exercise.exercise}
+      </h3>
+
+      {/* Sets x Reps @ Weight */}
+      <p className="text-xs text-gray-600">
+        {exercise.setsReps} @ {exercise.weight}
+      </p>
+
+      {/* Progress bar for completed sets */}
+      {totalSets > 0 && (
+        <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1.5">
+          <div
+            className="bg-emerald-400 h-1.5 rounded-full transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+      )}
     </div>
   );
 }

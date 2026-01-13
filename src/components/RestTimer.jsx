@@ -1,73 +1,135 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { MdChevronRight } from 'react-icons/md'
 
-function RestTimer({ duration, onComplete, onSkip }) {
-  const [timeLeft, setTimeLeft] = useState(duration)
+function RestTimer({ duration, onComplete, onSkip, nextExercise, isOpen }) {
+  const [timeLeft, setTimeLeft] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+  const onCompleteRef = useRef(onComplete)
 
+  // Keep ref updated
   useEffect(() => {
-    setTimeLeft(duration)
-  }, [duration])
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
+  // Reset and start timer when opening
   useEffect(() => {
-    if (timeLeft <= 0) {
-      onComplete()
-      return
+    if (isOpen && duration > 0) {
+      setTimeLeft(duration)
+      setIsActive(true)
+    } else {
+      setIsActive(false)
     }
+  }, [isOpen, duration])
 
-    const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1)
+  // Countdown timer
+  useEffect(() => {
+    if (!isActive || timeLeft <= 0) return
+
+    const timer = setTimeout(() => {
+      const newTime = timeLeft - 1
+      if (newTime <= 0) {
+        setIsActive(false)
+        onCompleteRef.current()
+      } else {
+        setTimeLeft(newTime)
+      }
     }, 1000)
 
-    return () => clearInterval(timer)
-  }, [timeLeft, onComplete])
+    return () => clearTimeout(timer)
+  }, [isActive, timeLeft])
 
   const minutes = Math.floor(timeLeft / 60)
   const seconds = timeLeft % 60
 
-  const percentage = ((duration - timeLeft) / duration) * 100
+  // Calculate percentage - start at 0% when timeLeft equals duration
+  const percentage = duration > 0 && timeLeft > 0
+    ? ((duration - timeLeft) / duration) * 100
+    : 0
+  const circumference = 2 * Math.PI * 70
+
+  if (!isOpen || timeLeft <= 0) return null
 
   return (
-    <div id="rest-timer" className="bg-white rounded-lg p-8">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-yellow-600">Rest Time</h2>
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/30 z-40"
+        onClick={onSkip}
+      />
 
-        <div className="relative inline-flex items-center justify-center">
-          <svg className="transform -rotate-90" width="240" height="240">
-            <circle
-              cx="120"
-              cy="120"
-              r="110"
-              stroke="#374151"
-              strokeWidth="10"
-              fill="none"
-            />
-            <circle
-              cx="120"
-              cy="120"
-              r="110"
-              stroke="#facc15"
-              strokeWidth="12"
-              fill="none"
-              strokeDasharray={2 * Math.PI * 110}
-              strokeDashoffset={2 * Math.PI * 110 * (1 - percentage / 100)}
-              style={{ transition: 'stroke-dashoffset 1s linear' }}
-            />
-          </svg>
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <span className="text-6xl font-bold text-gray-900">
-              {minutes > 0 && `${minutes}:`}
-              {seconds.toString().padStart(2, '0')}
-            </span>
+      {/* Bottom Sheet */}
+      <div
+        className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl shadow-2xl transform transition-transform duration-300"
+        style={{ maxHeight: '80vh' }}
+      >
+        <div className="p-6">
+          {/* Handle bar */}
+          <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-6" />
+
+          <h2 className="text-xl font-semibold text-center text-gray-700 mb-6">Rest Time</h2>
+
+          {/* Circular Timer */}
+          <div className="flex justify-center mb-6">
+            <div className="relative">
+              <svg className="transform -rotate-90" width="160" height="160">
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="70"
+                  stroke="#e5e7eb"
+                  strokeWidth="8"
+                  fill="none"
+                />
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="70"
+                  stroke="#10b981"
+                  strokeWidth="8"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={circumference * (1 - percentage / 100)}
+                  style={{ transition: 'stroke-dashoffset 0.15s linear' }}
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-4xl font-bold text-gray-900">
+                  {minutes > 0 && `${minutes}:`}
+                  {seconds.toString().padStart(2, '0')}
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* Skip Button */}
+          <button
+            onClick={onSkip}
+            className="w-full bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] uppercase tracking-wide mb-4"
+          >
+            Skip Rest
+          </button>
+
+          {/* Next Exercise Mini-Card */}
+          {nextExercise && (
+            <div className="bg-gray-50 rounded-xl p-3 flex items-center">
+              {nextExercise.image && (
+                <img
+                  src={nextExercise.image}
+                  alt={nextExercise.exercise}
+                  className="w-12 h-12 object-contain rounded-lg bg-white mr-3"
+                />
+              )}
+              <div className="flex-1">
+                <p className="text-sm text-gray-500">Up Next:</p>
+                <p className="font-semibold text-gray-900">{nextExercise.exercise}</p>
+              </div>
+              <MdChevronRight size={24} className="text-gray-400" />
+            </div>
+          )}
         </div>
       </div>
-
-      <button
-        onClick={onSkip}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-8 rounded-full transition-colors text-lg min-h-[56px]"
-      >
-        Skip Rest
-      </button>
-    </div>
+    </>
   )
 }
 
