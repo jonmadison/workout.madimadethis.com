@@ -89,9 +89,12 @@ function AppContent({ user, onLogout }) {
   const checkTodaysWorkout = async (user) => {
     if (!user) return
 
+    console.log('Checking todays workout for user:', user.username)
     const result = await getTodaysWorkout(user.username)
+    console.log('getTodaysWorkout result:', result)
     if (result.success) {
       setWorkoutCompletedToday(result.completed)
+      console.log('Set workoutCompletedToday to:', result.completed)
     }
   }
 

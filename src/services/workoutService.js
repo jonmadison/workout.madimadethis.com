@@ -103,6 +103,12 @@ export async function getTodaysWorkout(userId) {
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
+    console.log('getTodaysWorkout query:', {
+      userId,
+      startOfDay: startOfDay.toISOString(),
+      endOfDay: endOfDay.toISOString()
+    });
+
     const { data: workouts } = await client.models.WorkoutHistory.list({
       filter: {
         userId: { eq: userId },
@@ -112,8 +118,12 @@ export async function getTodaysWorkout(userId) {
       },
     });
 
+    console.log('Workouts found for today:', workouts);
+
     // Check if any workout completed today (status === 'completed')
     const completedToday = workouts?.some(w => w.status === 'completed');
+
+    console.log('completedToday:', completedToday);
 
     return { success: true, workout: workouts?.[0] || null, completed: completedToday };
   } catch (error) {
