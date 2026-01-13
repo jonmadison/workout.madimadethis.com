@@ -115,6 +115,16 @@ function AppContent({ user, onLogout }) {
   }
 
   const handleGoHome = () => {
+    // Refresh workout state from localStorage when returning home
+    const savedState = localStorage.getItem('workoutState')
+    if (savedState) {
+      try {
+        const parsedState = JSON.parse(savedState)
+        setWorkoutState(parsedState)
+      } catch (e) {
+        console.error('Failed to parse workout state:', e)
+      }
+    }
     setCurrentView('home')
   }
 
