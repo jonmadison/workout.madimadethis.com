@@ -6,10 +6,15 @@ const client = generateClient();
 
 export async function saveWorkout(workoutData) {
   try {
+    console.log('Attempting to save workout with data:', workoutData);
     const result = await client.models.WorkoutHistory.create(workoutData);
+    console.log('Raw create result:', result);
+    console.log('Result data:', result.data);
+    console.log('Result errors:', result.errors);
     return { success: true, data: result.data };
   } catch (error) {
-    console.error('Failed to save workout:', error);
+    console.error('Failed to save workout - full error:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
     // Save to localStorage for offline sync
     savePendingSync(workoutData);
     throw error;
@@ -113,21 +118,23 @@ export async function getTodaysWorkout(userId) {
       endOfDay: endOfDay.toISOString()
     });
 
-    const { data: workouts } = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
+    const result = await client.models.WorkoutHistory.listWorkoutHistoriesByUser({
       userId,
       workoutDate: {
         between: [startOfDay.toISOString(), endOfDay.toISOString()],
       },
     });
 
-    console.log('Workouts found for today:', workouts);
+    console.log('Raw query result:', result);
+    console.log('Query errors:', result.errors);
+    console.log('Workouts found for today:', result.data);
 
     // Check if any workout completed today (status === 'completed')
-    const completedToday = workouts?.some(w => w.status === 'completed');
+    const completedToday = result.data?.some(w => w.status === 'completed');
 
     console.log('completedToday:', completedToday);
 
-    return { success: true, workout: workouts?.[0] || null, completed: completedToday };
+    return { success: true, workout: result.data?.[0] || null, completed: completedToday };
   } catch (error) {
     console.error('Failed to check today\'s workout:', error);
     return { success: true, workout: null, completed: false };
