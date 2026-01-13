@@ -168,20 +168,22 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-4 pt-4 pb-48">
+      <div className="flex-1 overflow-y-auto px-4 pt-4 pb-56">
         {/* Exercise Image */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
+        <div className="flex justify-center mb-8">
           {currentExercise.image && (
-            <img
-              src={currentExercise.image}
-              alt={currentExercise.exercise}
-              className="w-full h-48 object-contain bg-gray-100"
-            />
+            <div className="bg-white rounded-2xl shadow-sm overflow-hidden inline-block">
+              <img
+                src={currentExercise.image}
+                alt={currentExercise.exercise}
+                className="h-36 object-contain bg-gray-100"
+              />
+            </div>
           )}
         </div>
 
         {/* Circular Progress with Sets Info */}
-        <div className="flex flex-col items-center mb-6">
+        <div className="flex flex-col items-center mb-20">
           <div className="relative w-40 h-40">
             <svg className="w-full h-full transform -rotate-90">
               <circle
@@ -213,11 +215,6 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
             </div>
           </div>
         </div>
-
-        {/* Elapsed Timer */}
-        <div className="text-center mb-6">
-          <p className="text-3xl font-mono text-gray-700">{formatTime(elapsedSeconds)}</p>
-        </div>
       </div>
 
       {/* Fixed Buttons and Next Exercise */}
@@ -248,11 +245,10 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
                 className="w-12 h-12 object-contain rounded-lg bg-gray-100 mr-3"
               />
             )}
-            <div className="flex-1">
+            <div className="flex-1 text-center pr-[60px]">
               <p className="text-sm text-gray-500">Next:</p>
               <p className="font-semibold text-gray-900">{nextExercise.exercise}</p>
             </div>
-            <MdChevronRight size={24} className="text-gray-400" />
           </div>
         )}
       </div>
