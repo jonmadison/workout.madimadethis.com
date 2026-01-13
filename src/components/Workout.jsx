@@ -1,4 +1,5 @@
 import { MdOutlineSwapHorizontalCircle, MdEdit } from 'react-icons/md';
+import ExerciseCard from './ExerciseCard';
 
 function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditWorkout, completedToday }) {
   const today = new Date();
@@ -35,31 +36,11 @@ function Workout({ exercises, workoutName, workoutAuthor, onSwapWorkout, onEditW
         </div>
         <div className="space-y-4">
           {exercises.map((exercise) => (
-          <div
-            key={exercise.order}
-            className="rounded-lg p-4"
-            style={{
-              backgroundColor: '#FEFEFD',
-              borderTop: completedToday ? '4px solid #10b981' : 'none'
-            }}
-          >
-            <div className="flex flex-col">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-medium text-gray-900">{exercise.order}. {exercise.exercise}</h3>
-                <span className="text-sm text-gray-600">{exercise.rest}s rest</span>
-              </div>
-              <div className="inline-block" style={{ maxWidth: '240px' }}>
-                {exercise.image && (
-                  <img
-                    src={exercise.image}
-                    alt={exercise.exercise}
-                    className="rounded-lg object-cover w-full mb-3"
-                  />
-                )}
-                <p className="text-gray-700">{exercise.setsReps} @ {exercise.weight}</p>
-              </div>
-            </div>
-          </div>
+            <ExerciseCard
+              key={exercise.order}
+              exercise={exercise}
+              completedToday={completedToday}
+            />
           ))}
         </div>
       </div>

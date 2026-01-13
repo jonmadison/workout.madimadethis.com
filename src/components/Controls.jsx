@@ -4,7 +4,7 @@ function Controls({ onStartWorkout }) {
       <div className="max-w-2xl mx-auto">
         <button
           onClick={onStartWorkout}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg"
+          className="w-full bg-emerald-200 hover:bg-emerald-300 text-gray-800 font-bold py-4 px-8 rounded-full transition-colors text-base min-h-[52px] shadow-lg"
         >
           Start Workout
         </button>
