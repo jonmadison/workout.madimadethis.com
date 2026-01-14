@@ -79,11 +79,6 @@ function WorkoutLibrary({ user, selectedWorkoutId, onWorkoutSelect }) {
   };
 
   const handleDeleteWorkout = async (workout) => {
-    if (workout.isDefault) {
-      alert('Cannot delete the default workout');
-      return;
-    }
-
     const confirmed = window.confirm(
       `Delete "${workout.name}"? This cannot be undone.`
     );
