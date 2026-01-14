@@ -27,6 +27,12 @@ function WorkoutLibrary({ user, selectedWorkoutId, onWorkoutSelect }) {
     setLoading(true);
     const result = await getWorkouts(user.username);
     if (result.success) {
+      console.log('=== Workout Library Debug ===');
+      console.log('Loaded workouts:', result.workouts.map(w => ({
+        id: w.workoutId,
+        name: w.name,
+        isDefault: w.isDefault
+      })));
       setWorkouts(result.workouts);
     }
     setLoading(false);
