@@ -5,6 +5,7 @@ import WorkoutEditor from './WorkoutEditor';
 import {
   getWorkouts,
   createWorkout,
+  updateWorkout,
   deleteWorkout,
   getSelectedWorkoutId,
   setSelectedWorkoutId,
@@ -42,14 +43,26 @@ function WorkoutLibrary({ user, selectedWorkoutId, onWorkoutSelect }) {
   };
 
   const handleSaveWorkout = async (workoutData) => {
-    const newWorkout = {
-      userId: user.username,
-      workoutId: crypto.randomUUID(),
-      ...workoutData,
-      isDefault: false,
-    };
+    let result;
 
-    const result = await createWorkout(newWorkout);
+    if (editingWorkout) {
+      // Update existing workout
+      result = await updateWorkout(
+        user.username,
+        editingWorkout.workoutId,
+        workoutData
+      );
+    } else {
+      // Create new workout
+      const newWorkout = {
+        userId: user.username,
+        workoutId: crypto.randomUUID(),
+        ...workoutData,
+        isDefault: false,
+      };
+      result = await createWorkout(newWorkout);
+    }
+
     if (result.success) {
       setIsCreatingNew(false);
       setEditingWorkout(null);

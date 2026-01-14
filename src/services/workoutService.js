@@ -23,7 +23,15 @@ export async function saveWorkout(workoutData) {
 
 export async function deleteWorkout(workoutId) {
   try {
-    await client.models.WorkoutHistory.delete({ workoutId });
+    console.log('=== Delete Workout Debug ===');
+    console.log('Attempting to delete workoutId:', workoutId);
+
+    const result = await client.models.WorkoutHistory.delete({ workoutId });
+
+    console.log('Delete result:', result);
+    console.log('Deleted data:', result.data);
+    console.log('Delete errors:', result.errors);
+
     return { success: true };
   } catch (error) {
     console.error('Failed to delete workout:', error);

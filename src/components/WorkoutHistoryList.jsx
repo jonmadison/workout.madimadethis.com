@@ -1,6 +1,10 @@
 import { formatDate, formatTime, formatDuration } from '../utils/dateUtils'
 
 function WorkoutHistoryList({ workouts, selectedDate, onDeleteWorkout }) {
+  console.log('=== WorkoutHistoryList Debug ===');
+  console.log('Number of workouts to display:', workouts?.length);
+  console.log('Workout IDs:', workouts?.map(w => ({ id: w.workoutId, name: w.routineName })));
+
   if (!workouts || workouts.length === 0) {
     return (
       <div className="bg-white rounded-lg p-6 text-center">
