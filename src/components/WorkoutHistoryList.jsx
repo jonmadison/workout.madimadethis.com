@@ -1,6 +1,6 @@
 import { formatDate, formatTime, formatDuration } from '../utils/dateUtils'
 
-function WorkoutHistoryList({ workouts, selectedDate }) {
+function WorkoutHistoryList({ workouts, selectedDate, onDeleteWorkout }) {
   if (!workouts || workouts.length === 0) {
     return (
       <div className="bg-white rounded-lg p-6 text-center">
@@ -42,15 +42,23 @@ function WorkoutHistoryList({ workouts, selectedDate }) {
                   by {workout.routineAuthor}
                 </p>
               </div>
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  workout.status === 'completed'
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-yellow-100 text-yellow-800'
-                }`}
-              >
-                {workout.status === 'completed' ? 'Completed' : 'Partial'}
-              </span>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    workout.status === 'completed'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }`}
+                >
+                  {workout.status === 'completed' ? 'Completed' : 'Partial'}
+                </span>
+                <button
+                  onClick={() => onDeleteWorkout(workout.workoutId)}
+                  className="px-3 py-1 text-sm text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
 
             {/* Stats */}

@@ -21,6 +21,16 @@ export async function saveWorkout(workoutData) {
   }
 }
 
+export async function deleteWorkout(workoutId) {
+  try {
+    await client.models.WorkoutHistory.delete({ workoutId });
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to delete workout:', error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function getWorkoutsByMonth(userId, year, month) {
   try {
     const { startDate, endDate } = getMonthRange(year, month);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import MonthlyCalendar from './MonthlyCalendar'
 import WorkoutHistoryList from './WorkoutHistoryList'
-import { getWorkoutsByMonth, getWorkoutsByDateRange } from '../services/workoutService'
+import { getWorkoutsByMonth, deleteWorkout } from '../services/workoutService'
 
 function CalendarView({ user }) {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -66,10 +66,26 @@ function CalendarView({ user }) {
     setSelectedDate(date)
   }
 
+  const handleDeleteWorkout = async (workoutId) => {
+    const confirmed = window.confirm('Are you sure you want to delete this workout?')
+    if (!confirmed) return
+
+    const result = await deleteWorkout(workoutId)
+    if (result.success) {
+      // Reload workouts
+      loadMonthWorkouts()
+    } else {
+      alert('Failed to delete workout. Please try again.')
+    }
+  }
+
   // Get completed workout dates for the calendar
   const completedWorkoutDates = monthWorkouts
     .filter(workout => workout.status === 'completed')
     .map(workout => workout.workoutDate)
+
+  console.log('All month workouts:', monthWorkouts)
+  console.log('Completed workout dates for calendar:', completedWorkoutDates)
 
   return (
     <div id="calendar-view" className="h-full flex flex-col overflow-hidden">
@@ -112,6 +128,7 @@ function CalendarView({ user }) {
             <WorkoutHistoryList
               workouts={dateWorkouts}
               selectedDate={selectedDate}
+              onDeleteWorkout={handleDeleteWorkout}
             />
           )}
         </div>
