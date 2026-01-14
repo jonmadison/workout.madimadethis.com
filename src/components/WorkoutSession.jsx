@@ -157,7 +157,7 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
         isOpen={isResting}
       />
       {/* Progress Bar */}
-      <div className="flex-shrink-0 px-4 pt-3 pb-3 bg-white">
+      <div className="flex-shrink-0 px-4 pt-2 bg-white" style={{ paddingBottom: '12px' }}>
         <h2 className="text-base font-bold text-gray-900 mb-1">{currentExercise.exercise}</h2>
         <div className="flex justify-between text-sm text-gray-600 mb-1">
           <span>Exercise {currentExerciseIndex + 1} of {routine.length}</span>
