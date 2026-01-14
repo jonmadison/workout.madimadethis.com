@@ -3,7 +3,7 @@ import Navigation from './Navigation'
 
 function Header({ title, onHomeClick, currentView, onNavigate, onLogout, user }) {
   return (
-    <div id="header" className="px-4 pt-3 pb-8 flex-shrink-0">
+    <div id="header" className="px-4 pt-2 flex-shrink-0" style={{ paddingBottom: '12px' }}>
       <div className="max-w-2xl mx-auto flex items-center justify-between">
         {/* Logo and title on the left */}
         <button
