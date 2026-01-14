@@ -31,13 +31,15 @@ function WorkoutCard({ workout, isSelected, onSelect, onEdit, onDelete }) {
           >
             <MdEdit size={18} />
           </button>
-          <button
-            onClick={onDelete}
-            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-            title="Delete workout"
-          >
-            <MdDelete size={18} />
-          </button>
+          {!workout.isDefault && (
+            <button
+              onClick={onDelete}
+              className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              title="Delete workout"
+            >
+              <MdDelete size={18} />
+            </button>
+          )}
         </div>
       </div>
 
