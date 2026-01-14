@@ -25,6 +25,11 @@ function WorkoutHistoryList({ workouts, selectedDate }) {
           (workout.completedExercises / workout.totalExercises) * 100
         )
 
+        // Parse exercises JSON string
+        const exercises = typeof workout.exercises === 'string'
+          ? JSON.parse(workout.exercises)
+          : workout.exercises
+
         return (
           <div key={workout.workoutId} className="bg-white rounded-lg p-6 shadow-sm">
             {/* Header */}
@@ -74,7 +79,7 @@ function WorkoutHistoryList({ workouts, selectedDate }) {
             <div>
               <h4 className="text-sm font-semibold text-gray-700 mb-2">Exercises</h4>
               <div className="space-y-2">
-                {workout.exercises.map((exercise) => (
+                {exercises.map((exercise) => (
                   <div
                     key={exercise.order}
                     className={`flex items-center justify-between p-2 rounded ${

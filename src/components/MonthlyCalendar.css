@@ -37,13 +37,15 @@
   color: white;
 }
 
-.monthly-calendar .react-calendar__tile.has-workout {
-  background-color: #d1fae5;
+.monthly-calendar .react-calendar__tile.completed-workout {
+  background-color: #34d399;
+  color: white;
+  font-weight: 600;
 }
 
-.monthly-calendar .react-calendar__tile.has-workout:enabled:hover,
-.monthly-calendar .react-calendar__tile.has-workout:enabled:focus {
-  background-color: #a7f3d0;
+.monthly-calendar .react-calendar__tile.completed-workout:enabled:hover,
+.monthly-calendar .react-calendar__tile.completed-workout:enabled:focus {
+  background-color: #10b981;
 }
 
 .workout-indicator {

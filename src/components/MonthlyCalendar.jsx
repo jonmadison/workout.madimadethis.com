@@ -2,24 +2,14 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import './MonthlyCalendar.css'
 
-function MonthlyCalendar({ selectedDate, onSelectDate, workoutDates }) {
-  // Create a Set of date strings for quick lookup
-  const workoutDateSet = new Set(
-    workoutDates.map(date => new Date(date).toDateString())
+function MonthlyCalendar({ selectedDate, onSelectDate, completedWorkoutDates }) {
+  // Create a Set of completed workout date strings for quick lookup
+  const completedDateSet = new Set(
+    completedWorkoutDates.map(date => new Date(date).toDateString())
   )
 
-  // Custom tile content to show dots for workout days
+  // Custom tile content - no dots needed anymore
   const tileContent = ({ date, view }) => {
-    if (view === 'month') {
-      const dateString = date.toDateString()
-      if (workoutDateSet.has(dateString)) {
-        return (
-          <div className="workout-indicator">
-            <div className="workout-dot"></div>
-          </div>
-        )
-      }
-    }
     return null
   }
 
@@ -32,8 +22,8 @@ function MonthlyCalendar({ selectedDate, onSelectDate, workoutDates }) {
       if (dateString === selectedDateString) {
         return 'selected-date'
       }
-      if (workoutDateSet.has(dateString)) {
-        return 'has-workout'
+      if (completedDateSet.has(dateString)) {
+        return 'completed-workout'
       }
     }
     return null

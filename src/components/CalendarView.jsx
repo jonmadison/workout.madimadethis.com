@@ -66,8 +66,10 @@ function CalendarView({ user }) {
     setSelectedDate(date)
   }
 
-  // Get unique workout dates for the calendar indicators
-  const workoutDates = monthWorkouts.map(workout => workout.workoutDate)
+  // Get completed workout dates for the calendar
+  const completedWorkoutDates = monthWorkouts
+    .filter(workout => workout.status === 'completed')
+    .map(workout => workout.workoutDate)
 
   return (
     <div id="calendar-view" className="h-full flex flex-col overflow-hidden">
@@ -93,7 +95,7 @@ function CalendarView({ user }) {
             <MonthlyCalendar
               selectedDate={selectedDate}
               onSelectDate={handleDateSelect}
-              workoutDates={workoutDates}
+              completedWorkoutDates={completedWorkoutDates}
             />
           )}
         </div>
