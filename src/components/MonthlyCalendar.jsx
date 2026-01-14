@@ -19,11 +19,12 @@ function MonthlyCalendar({ selectedDate, onSelectDate, completedWorkoutDates }) 
       const dateString = date.toDateString()
       const selectedDateString = selectedDate ? new Date(selectedDate).toDateString() : null
 
-      if (dateString === selectedDateString) {
-        return 'selected-date'
-      }
+      // Prioritize showing completed workouts in green, even if selected
       if (completedDateSet.has(dateString)) {
         return 'completed-workout'
+      }
+      if (dateString === selectedDateString) {
+        return 'selected-date'
       }
     }
     return null

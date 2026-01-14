@@ -80,12 +80,17 @@ function CalendarView({ user }) {
   }
 
   // Get completed workout dates for the calendar
-  const completedWorkoutDates = monthWorkouts
-    .filter(workout => workout.status === 'completed')
-    .map(workout => workout.workoutDate)
+  const completedWorkouts = monthWorkouts.filter(workout => {
+    console.log('Workout status:', workout.status, 'for workout:', workout.workoutId)
+    return workout.status === 'completed'
+  })
+  const completedWorkoutDates = completedWorkouts.map(workout => workout.workoutDate)
 
-  console.log('All month workouts:', monthWorkouts)
-  console.log('Completed workout dates for calendar:', completedWorkoutDates)
+  console.log('=== Calendar Highlighting Debug ===')
+  console.log('Total month workouts:', monthWorkouts.length)
+  console.log('Completed workouts:', completedWorkouts.length)
+  console.log('Completed workout dates:', completedWorkoutDates)
+  console.log('Sample workout:', monthWorkouts[0])
 
   return (
     <div id="calendar-view" className="h-full flex flex-col overflow-hidden">
