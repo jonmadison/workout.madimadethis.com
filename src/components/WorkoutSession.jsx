@@ -43,7 +43,8 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
         setIsResting(true)
         setRestTime(currentExercise.rest)
       } else {
-        handleSaveAndComplete()
+        // Pass the new value directly since state won't update in time
+        handleSaveAndComplete(newCompletedSets)
       }
     } else {
       setCompletedSets(newCompletedSets)
@@ -79,13 +80,13 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
     localStorage.setItem('workoutState', JSON.stringify(state))
   }, [currentExerciseIndex, completedSets, isResting, restTime, startTime])
 
-  const handleSaveAndComplete = async () => {
+  const handleSaveAndComplete = async (finalCompletedSets = completedSets) => {
     try {
       const endTime = new Date()
       const start = new Date(startTime)
       const durationMinutes = Math.round((endTime - start) / 1000 / 60)
 
-      const isFullyCompleted = currentExerciseIndex === routine.length - 1 && completedSets >= parseInt(routine[currentExerciseIndex].setsReps.split('x')[0])
+      const isFullyCompleted = currentExerciseIndex === routine.length - 1 && finalCompletedSets >= parseInt(routine[currentExerciseIndex].setsReps.split('x')[0])
       const completedExercisesCount = currentExerciseIndex + (isFullyCompleted ? 1 : 0)
 
       const exercisesData = routine.map((exercise, index) => {
@@ -97,10 +98,10 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
           exerciseCompletedSets = totalSets
           exerciseStatus = 'completed'
         } else if (index === currentExerciseIndex) {
-          exerciseCompletedSets = completedSets
-          if (completedSets >= totalSets) {
+          exerciseCompletedSets = finalCompletedSets
+          if (finalCompletedSets >= totalSets) {
             exerciseStatus = 'completed'
-          } else if (completedSets > 0) {
+          } else if (finalCompletedSets > 0) {
             exerciseStatus = 'partial'
           }
         }

@@ -29,6 +29,7 @@ function AppContent({ user, onLogout }) {
   const [showWorkoutEditor, setShowWorkoutEditor] = useState(false)
   const [editingWorkout, setEditingWorkout] = useState(null)
   const [workoutCompletedToday, setWorkoutCompletedToday] = useState(false)
+  const [todaysWorkoutData, setTodaysWorkoutData] = useState(null)
 
   // Check localStorage on mount to restore workout state
   useEffect(() => {
@@ -94,7 +95,9 @@ function AppContent({ user, onLogout }) {
     console.log('getTodaysWorkout result:', result)
     if (result.success) {
       setWorkoutCompletedToday(result.completed)
+      setTodaysWorkoutData(result.workout)
       console.log('Set workoutCompletedToday to:', result.completed)
+      console.log('Set todaysWorkoutData to:', result.workout)
     }
   }
 
@@ -155,23 +158,40 @@ function AppContent({ user, onLogout }) {
 
   // Build completed sets map from workout state for progress display
   const getCompletedSetsMap = () => {
-    if (!workoutState || !currentWorkout) return {}
+    // If there's an in-progress workout, show that progress
+    if (workoutState && currentWorkout) {
+      const map = {}
+      currentWorkout.exercises.forEach((exercise, index) => {
+        if (index < workoutState.currentExerciseIndex) {
+          // Previous exercises are fully completed
+          const totalSets = parseInt(exercise.setsReps.split('x')[0]) || 0
+          map[exercise.order] = totalSets
+        } else if (index === workoutState.currentExerciseIndex) {
+          // Current exercise shows partial progress
+          map[exercise.order] = workoutState.completedSets
+        } else {
+          // Future exercises have 0 completed
+          map[exercise.order] = 0
+        }
+      })
+      return map
+    }
 
-    const map = {}
-    currentWorkout.exercises.forEach((exercise, index) => {
-      if (index < workoutState.currentExerciseIndex) {
-        // Previous exercises are fully completed
-        const totalSets = parseInt(exercise.setsReps.split('x')[0]) || 0
-        map[exercise.order] = totalSets
-      } else if (index === workoutState.currentExerciseIndex) {
-        // Current exercise shows partial progress
-        map[exercise.order] = workoutState.completedSets
-      } else {
-        // Future exercises have 0 completed
-        map[exercise.order] = 0
+    // If workout completed today, show completed progress from database
+    if (todaysWorkoutData && todaysWorkoutData.exercises) {
+      try {
+        const exercises = JSON.parse(todaysWorkoutData.exercises)
+        const map = {}
+        exercises.forEach(ex => {
+          map[ex.order] = ex.completedSets || 0
+        })
+        return map
+      } catch (e) {
+        console.error('Failed to parse exercises:', e)
       }
-    })
-    return map
+    }
+
+    return {}
   }
 
   const handleWorkoutSelect = (workout) => {
