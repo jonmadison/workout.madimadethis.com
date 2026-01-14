@@ -7,8 +7,9 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
   const [startTime] = useState(() => initialState?.startTime || new Date().toISOString())
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(initialState?.currentExerciseIndex || 0)
   const [completedSets, setCompletedSets] = useState(initialState?.completedSets || 0)
-  const [isResting, setIsResting] = useState(initialState?.isResting || false)
-  const [restTime, setRestTime] = useState(initialState?.restTime || 0)
+  // When resuming, skip rest state and go straight to the exercise
+  const [isResting, setIsResting] = useState(false)
+  const [restTime, setRestTime] = useState(0)
   const [elapsedSeconds, setElapsedSeconds] = useState(0)
 
   const currentExercise = routine[currentExerciseIndex]
