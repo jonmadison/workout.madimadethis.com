@@ -126,7 +126,7 @@ function WorkoutSession({ routine, onComplete, initialState, user, workoutName, 
         completedExercises: completedExercisesCount,
         totalExercises: routine.length,
         durationMinutes: durationMinutes,
-        exercises: exercisesData
+        exercises: JSON.stringify(exercisesData)
       }
 
       const saveResult = await saveWorkout(workoutData)
