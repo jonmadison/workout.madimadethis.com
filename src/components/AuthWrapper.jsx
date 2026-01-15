@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Amplify } from 'aws-amplify';
 import { getAuthenticatedUser, autoSignInDefaultUser } from '../services/authService';
 import { syncPendingWorkouts } from '../services/workoutService';
 import { seedDefaultWorkout } from '../services/workoutLibraryService';
 import LoginScreen from './LoginScreen';
-import amplifyConfig from '../../amplify_outputs.json';
-
-// Configure Amplify
-Amplify.configure(amplifyConfig);
 
 function AuthWrapper({ children }) {
   const [user, setUser] = useState(null);
